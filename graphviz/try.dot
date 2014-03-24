@@ -1,0 +1,55 @@
+
+// direction graph
+digraph G {
+
+// shape: circle, box, ellipse, polygon, plaintext
+// shape.style: filled
+// shape.color: colorName or "r,g,b" or "#rrggbb"
+main [shape=circle,style=filled,color= "0.6, 0.6, 1.0"];
+// font properties
+Animal [shape=box, fontname="fixed", fontsize="16", fontcolor="red"];
+
+// edge.style: bold,dotted
+// edge.weight,
+// edge.color
+// edge.label
+main -> Animal [style = bold, color = "#ff3300"];
+    
+    Tree [shape=ellipse];
+    Air [shape=plaintext];
+    Tree -> Air [color = blue, label = "need\nof", style=dotted];
+
+// shape.orientation = angle
+// 平行四边形
+Dream [shape=box, orientation=45];
+// polygon.sides
+// polygon.skew: [-1.0, 1.0]
+// polygon.periphery: specify how many outline
+// polygon.distortion: If distortion is less than 0, the top border is shorter than bottom border
+Snake [shape=polygon, sides = 4,
+       skew = "-0.5", distortion="-0.3", peripheries=2];
+Dream -> Snake;
+Fight [shape=polygon, sides = 4, skew = "0.3", color=red];
+
+// shape: invtriangle, triangle
+Win [shape=invtriangle];
+Fail [shape=triangle];
+Fight -> {Win; Fail};
+
+// Shape record, Mrecord
+// Multiline labels
+// 换行符 (\n 当前行居中; \l 当前行左对齐; \r 当前行右对齐)
+Dog [shape=record,
+     label="{\
+         Dog|\
+         + skinColor}"];
+aCat [shape=Mrecord, style=filled,
+      label="{aCat|+miou(): void}"];
+Dog -> aCat;
+
+R1 [shape=record, label="<f0> left|<f1> middle|<f2> right"];
+R2 [shape=record, label="R2|{a|b|{c|d}}"];
+R1 -> R2;
+
+
+}

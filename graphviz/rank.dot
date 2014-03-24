@@ -1,0 +1,21 @@
+digraph G {
+    // rank=same;
+    nodesep=0.75;
+    node[shape=Msquare,style=filled,fillcolor="#ffcccc"];
+    edge [arrowtail=dot,arrowhead=empty];
+//          tailclip=false, headclip=false];
+    
+    nodeA -> nodeB [tailport=ne,headport=n];
+    
+    nodeB:s -> nodeC:s;
+    nodeD [shape=record, label="<here>|<middle>|<there>"];
+    nodeD:here -> nodeC:n [weight=10];
+    
+    
+    {rank=sink;
+        nodeA;
+        nodeB;
+        nodeC;
+        };
+        
+}

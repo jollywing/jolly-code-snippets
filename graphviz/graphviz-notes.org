@@ -1,0 +1,48 @@
+
+
+* Comment
+- ~/* ... */~
+- ~// ...~
+
+* Shape
+- plaintext
+- trapezium //等腰梯形
+- parallelogram //平行四边形
+- ellipse
+- box
+- Msquare
+- Mdiamond
+- circle
+- record
+- Mrecord
+* Edge
+- A -> B [weight=2.0]; dot causes edges with heavier weights to be drawn
+  shorter and straighter.
+- A -> B [weight=10, style=invis]; adjust layout of nodes with invisible edges.
+
+* Size, Spacing
+- ~nodesep=1.0~ : The minimum distance between two nodes is 1.0 inch
+- ~ranksep=2.5~ : The minimum distance between two ranks is 2.5 inch
+- ~ranksep=equally~ : all of ranks are equally spaced
+- ~ranksep="1.5 equally".~ : all of ranks are equally spaced, with the minimum seperation of 1.5 inch.
+- ~size="7.5, 10".~ ajust the size of the graph to fit 8.5x11 page.
+- ~ratio=x~. x is a float point number, stretch the graph to make ~height/width = x~.
+- ~size=x,y; ratio=fill~. stretch the graph to make ~height/width = y/x~.
+- ~size=x,y; ratio=compress~. It won't stretch the graph in one demension, but compress the layout to size.
+- ~rotate=90~ or ~orientation=landscape~, will draw graph in landscape mode.
+- ~center=true~ The graph is repositioned to be centered in the page, if ~page=x,y~ is not set, 8.5x11 is supposed.
+
+* Node and Edge placement
+- ~rankdir=LR~ : draw edge from left to right, instead from top to bottom by default.
+  you can also set ~rankdir=RL~ or ~rankdir=BT~. The default value of rankdir is ~TB~.
+- ~{rank=same;nodeA;nodeB;nodeC}~ : nodeA, nodeB and nodeC are placed in the same rank.
+- ~{rank=sink;nodeA;nodeB;nodeC}~ : nodeA, nodeB and nodeC are placed in different ransk as possiple.
+
+* Node ports
+- ~A -> B [tailport=ne]~ the tail of edge will be on the right-top corner
+  of node A. ~A -> B:ne~ does the same thing. The ports of a node includes:
+  e, w, s, n, se, ne, nw, sw.
+- ~A:f0 -> B:f1:n~ A and B are record nodes, the edge from the f0 field of
+  A to the top-center of B's f1 field.
+
+By default, the edge is clipped to the box’s boundary.

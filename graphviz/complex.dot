@@ -1,0 +1,27 @@
+digraph G {
+
+start[shape=diamond];
+corner[label="",shape=none];
+{rank=same; start; corner;}
+
+start -> corner [arrowhead=none,headclip=false];
+corner -> end [tailclip=false, weight=10, arrowhead=empty];
+
+subgraph class {
+//    layers="bottom:top";
+    
+Dog [//layer="bottom",
+     shape=record,
+     label="{Dog|<func>getName()}"];
+
+// Point [layer="top", shape=point, label=""];
+
+
+comment[shape=note, label="String getName(){\l  return name;\l}\l"];
+
+// Point -> comment [arrowtail=dot, tailclip=false];
+}
+
+
+
+}

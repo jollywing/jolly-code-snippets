@@ -1,0 +1,24 @@
+digraph Styles {
+    label="Styles of node, edge";
+    bgcolor="#aaaaff";
+    
+// The styles of node and edge:
+// solid, dashed, dotted, bold, invis (invisable).
+// node styles also include: filled(color is specified by fillcolor),
+// rounded(round the corner)
+Hero [shape=record, style="bold,filled,rounded", fillcolor="#8888ff",
+      label="{Hero | + attack(Role *enemy): void\l | + HP: int\l+ MP: int\l}"
+      ];
+
+// diagonals
+Zhao [shape=box, style=diagonals];
+
+// edge styles
+// the arrow size is 1.5 times the orginal size
+edge [arrowsize=1.5];
+
+// dir: forward(default), back, both, none.
+// arrowhead, arrowtail: normal, inv, dot, invdot, odot, invodot, none.
+Hero -> Zhao [dir=back, arrowhead=odot];
+
+}

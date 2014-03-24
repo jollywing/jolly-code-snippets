@@ -1,0 +1,40 @@
+
+digraph novel {
+    node [shape=box, style=filled, fillcolor="#99aaff"];
+    edge [arrowhead=none];
+    ranksep=0.2;
+    
+    a1 [label="Andy接受审判"];
+    a2 [label="Andy入狱"];
+    a3 [label="偶入墓地,\n得宝物,在军\n队开始修炼"];
+    a4 [label="得星石，\n星海开启"];
+    a5 [label="回叶家，\n救馨儿"];
+    a6 [label="叶明陷害,\n逃避"];
+    a7 [label="走投无路,\n公主庇护"];
+    a8 [label="得势，\n当大将军"];
+    
+    
+    b1 [label="Red假释被拒"];
+    b2 [label="叶明杀叶清,\n馨儿逃走"];
+
+c1 [label="送星石回李家"];
+c2 [label="星石相助"];
+
+{rank=same;c1;a4;}
+{rank=same;c2;a8;}
+    {rank=same;a1;b1;}
+    {rank=same;a6;b2;}
+    a1 -> a2 -> a3 -> a4 -> a5 -> a6 -> a7 -> a8;
+
+edge [color=red];
+a1 -> b1;
+b1 -> b2;
+a6 -> b2;
+
+edge [color=blue];
+
+c1 -> a4;
+c2 -> a8;
+c1 -> c2;
+
+}
