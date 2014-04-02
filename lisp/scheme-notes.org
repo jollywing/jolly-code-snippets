@@ -1,0 +1,25 @@
+
+
+* guile
+** what is guile
+1. GNU dynamic language interpreter
+2. can interpret scheme
+3. a embeddable interpreter, can be called in c program.
+** Start and Quit guile
+1. =$ guile=
+2. =scheme@(guile-user)> (quit)= or =(exit)=
+* syntax
+** statement
+1. (func op1 op2 ...)
+** data type
+*** boolean
+**** true and false
+=#t=, while it is =t= in elisp
+=#f=, while it is =nil= in elisp
+**** check boolean value
+(boolean? #t)
+** function
+*** define function
+(define (func-name args) (statements))
+*** call function
+(func-name args)
