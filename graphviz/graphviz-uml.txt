@@ -1,0 +1,216 @@
+ UML类图
+分类： UML 2012-11-24 20:27 253人阅读 评论(0) 收藏 举报
+  在UML类图中，常见的有以下几种关系: 泛化（Generalization）,  实现（Realization），关联（Association)，聚合（Aggregation），组合(Composition)，依赖(Dependency)
+         1. 泛化（Generalization）
+        【泛化关系】：是一种继承关系，表示一般与特殊的关系，它指定了子类如何特化父类的所有特征和行为。例如：老虎是动物的一种，即有老虎的特性也有动物的共性。
+        【箭头指向】：带三角箭头的实线，箭头指向父类
+ 
+        2. 实现（Realization）
+        【实现关系】：是一种类与接口的关系，表示类是接口所有特征和行为的实现.
+        【箭头指向】：带三角箭头的虚线，箭头指向接口
+ 
+        3. 关联（Association)
+        【关联关系】：是一种拥有的关系，它使一个类知道另一个类的属性和方法；如：老师与学生，丈夫与妻子关联可以是双向的，也可以是单向的。双向的关联可以有两个箭头或者没有箭头，单向的关联有一个箭头。
+        【代码体现】：成员变量
+        【箭头及指向】：带普通箭头的实心线，指向被拥有者
+ 
+        上图中，老师与学生是双向关联，老师有多名学生，学生也可能有多名老师。但学生与某课程间的关系为单向关联，一名学生可能要上多门课程，课程是个抽象的东西他不拥有学生。 
+        下图为自身关联： 
+
+        4. 聚合（Aggregation）
+        【聚合关系】：是整体与部分的关系，且部分可以离开整体而单独存在。如车和轮胎是整体和部分的关系，轮胎离开车仍然可以存在。
+        聚合关系是关联关系的一种，是强的关联关系；关联和聚合在语法上无法区分，必须考察具体的逻辑关系。
+        【代码体现】：成员变量
+        【箭头及指向】：带空心菱形的实心线，菱形指向整体
+ 
+        5. 组合(Composition)
+        【组合关系】：是整体与部分的关系，但部分不能离开整体而单独存在。如公司和部门是整体和部分的关系，没有公司就不存在部门。
+       组合关系是关联关系的一种，是比聚合关系还要强的关系，它要求普通的聚合关系中代表整体的对象负责代表部分的对象的生命周期。
+【代码体现】：成员变量
+【箭头及指向】：带实心菱形的实线，菱形指向整体
+
+        6. 依赖(Dependency)
+        【依赖关系】：是一种使用的关系，即一个类的实现需要另一个类的协助，所以要尽量不使用双向的互相依赖.
+        【代码表现】：局部变量、方法的参数或者对静态方法的调用
+        【箭头及指向】：带箭头的虚线，指向被使用者
+ 
+        各种关系的强弱顺序：
+        泛化 = 实现 > 组合 > 聚合 > 关联 > 依赖 
+        下面这张UML图，比较形象地展示了各种类图关系：
+
+转自：http://blog.csdn.net/tianhai110/article/details/6339565
+更多
+
+ 使用Graphviz Dot绘制类图
+分类： 工具相关 2013-03-17 22:36 277人阅读 评论(0) 收藏 举报
+目录(?)[+]
+简介
+背景
+本文介绍如何使用Graphviz package的dot工具动态生成UML图，涵盖了UML类图的包、类、属性、方法、关系建模。当然，本文仅仅描述手工创建UML图描述的场景，但在通过工具分析代码结构时将变得非常有用，尤其是要创建一个类似于UMLGraph的软件时，所以，继续往下读吧~
+开始
+准备工作
+首先，从Graphviz website下载Graphviz工具包，根据使用操作系统的差异，进行直接安装或编译安装，Linux用户可以直接通过包管理工具获取。准备工作结束，通过例子去认识了解它将是直接而高效的，本文将使用这种方式，还有就是，安装Bitstream Vera字体，因为本文一直用它~
+所谓的“问题”
+例子基于动物世界的一角，建模一个superclass：Animal，有两个subclasses：Dog、Cat，动物有attributes、methods，并且Dog、Cat会添加method关联起来。我们会建模Dog、Cat之间N:M的死敌association，另外，Animal类在默认的package，而Dog、Cat在"animal.impl“包中。
+打开一个文本编辑器，开始吧~~~
+
+绘图基础
+常规属性
+先为dot工具写一个样板：
+digraph G {
+        fontname = "Bitstream Vera Sans"
+        fontsize = 8
+
+        node [
+                fontname = "Bitstream Vera Sans"
+                fontsize = 8
+                shape = "record"
+        ]
+
+        edge [
+                fontname = "Bitstream Vera Sans"
+                fontsize = 8
+        ]
+不用担心没看明白，第一行指我们要绘制一个directed graph，简称为digraph；一个directed graph是指一个这样的图：图中的每个边都是从一个节点指向另外一个节点，每个边都有一个开始节点和结束节点；第二、三行设置了图中文字使用的字体、大小，接下来的几行设置了节点、边所使用的默认字体属性，上面的代码并不完整，缺少一个重要的信息：为节点定义shape属性。
+通过设置节点的shape类型为record，可以很好的使用横杠分割一个节点来展示一个UML的类图。
+建模Animal类
+建模一个Animal类，有两个共有属性：name、age，一个公有方法：die()，作为一个简单的例子，这样足够了，建模为：
+        Animal [
+                label = "{Animal|+ name : string\l+ age : int\l|+ die() : void\l}"
+        ]
+如果你没有看懂dot的语法，我有点无奈了，dot解析后的类图如下：
+
+
+现在有个基本的概念了吧~
+怎么做到的？
+设置的label属性做了如下几件事情：
+"{"、"}"表示创建一个包含多个分割段的"record" shape；
+管道"|"表示分割符，一个用来分割类名、类属性，一个用来分割类属性、类函数；
+"\|"用来从当前位置回车换行，并从左侧开始显示；
+试一下吧！
+创建一个文件”class.dot“，并复制粘贴下面的代码：
+digraph G {
+        fontname = "Bitstream Vera Sans"
+        fontsize = 8
+
+        node [
+                fontname = "Bitstream Vera Sans"
+                fontsize = 8
+                shape = "record"
+        ]
+
+        edge [
+                fontname = "Bitstream Vera Sans"
+                fontsize = 8
+        ]
+
+        Animal [
+                label = "{Animal|+ name : string\l+ age : int\l|+ die() : void\l}"
+        ]
+}
+打开命令行，将当前目录切换到”class.dot“所在目录，执行如下命令：
+dot -T png -o class.png class.dot
+
+将会生成一个Animal类的PNG文件（译注：可能会因为不支持png提示失败，可以换成jpg、svg啥的试下），余下内容将假设你对dot文件的格式懂了，只展示模型的内容。
+继续建模
+创建Dog、Cat类
+Dog、Cat类很简单，在Animal类的后面追加如下内容：
+        Dog [
+                label = "{Dog||+ bark() : void\l}"
+        ]
+
+        Cat [
+                label = "{Cat||+ meow() : void\l}"
+        ]
+执行dot命令后，生成的没有association的类图如下：
+
+
+建模子类之间的关系
+Dog和Cat是Animal的子类，让我们添加UML中的类继承关系：从Dog、Cat指向Animal的空箭头，将如下代码追加到Cat后面：
+        edge [
+                arrowhead = "empty"
+        ]
+
+        Dog -> Animal
+        Cat -> Animal
+其中，在第二行将箭头设置为空，在下面的”->“表示有方向的关联，Dog、Cat继承自Animal，类图如下：
+
+
+建模“死敌”关系
+通过在子类关系代码后面追加如下代码，来表示Dog和Cat直接的死敌关系：
+        edge [
+                arrowhead = "none"
+
+                headlabel = "0..*"
+                taillabel = "0..*"
+        ]
+
+        Dog -> Cat
+第二行将边上的箭头去掉了，因为association没有呈现指向，"headlabel"、"taillabel"表示边的起始、结束描述信息；在N:M关系中，都是"0..*"，最后一行添加了Dog、Cat类之间的一条边，dot执行后的结果如下：
+
+
+建模package
+添加包需要在声明Dog类的前面添加如下两行，并在Cat类的后面添加"}"：
+        subgraph clusterAnimalImpl {
+                label = "Package animal.impl"
+第一行告诉dot包括的节点需要在一个集合框中展示，第二行描述了这个集合框的标题；subgraph表示一个集合的开始，只有关键字：subgraph才会被识别。
+结论
+最终的样子
+最终dot文件的内容如下：
+digraph G {
+        fontname = "Bitstream Vera Sans"
+        fontsize = 8
+
+        node [
+                fontname = "Bitstream Vera Sans"
+                fontsize = 8
+                shape = "record"
+        ]
+
+        edge [
+                fontname = "Bitstream Vera Sans"
+                fontsize = 8
+        ]
+
+        Animal [
+                label = "{Animal|+ name : string\l+ age : int\l|+ die() : void\l}"
+        ]
+
+        subgraph clusterAnimalImpl {
+                label = "Package animal.impl"
+
+                Dog [
+                        label = "{Dog||+ bark() : void\l}"
+                ]
+
+                Cat [
+                        label = "{Cat||+ meow() : void\l}"
+                ]
+        }
+
+        edge [
+                arrowhead = "empty"
+        ]
+
+        Dog -> Animal
+        Cat -> Animal
+
+        edge [
+                arrowhead = "none"
+
+                headlabel = "0..*"
+                taillabel = "0..*"
+        ]
+
+        Dog -> Cat
+}
+执行生成的UML类图如下：
+
+
+更多
+系统本文为您提供了一个通过dot动态绘制UML图良好的开端，访问UMLGraph website了解更多，希望对你有用。
+
+
+
+原文链接：UML Diagrams Using Graphviz Dot
+
