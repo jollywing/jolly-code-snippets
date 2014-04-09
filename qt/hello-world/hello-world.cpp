@@ -4,12 +4,13 @@
 #include <QTextStream>
 
 #include "test.h"
+#include "image-box.h"
 
 int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
-    QWidget window;
-    window.resize(250, 150);
+    ImageBox window;
+    window.resize(600, 600);
     window.setWindowTitle("Hello, QT!");
     window.show();
 
@@ -20,5 +21,6 @@ int main(int argc, char *argv[])
 
     testQfile();
     testQlist();
+    testQdir();
     return app.exec();
 }
