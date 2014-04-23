@@ -1,0 +1,23 @@
+<html>
+  <head>
+<title>embeded YouKu Video</title>
+<script language="javascript">
+function ShowVideo(){
+  video_region = document.getElementById("youku_video");
+  video_region.style.display = "block";
+}
+</script>
+</head>
+<body>
+<h1>embeded YouKu Video</h1>
+
+<!-- a good way to call javascript function in a link -->
+<p><a onclick="javascript:ShowVideo();return false;" href="#">Click to Play</a></p>
+<div id="youku_video" style="display:none">
+<embed   
+   src="http://player.youku.com/player.php/Type/Folder/Fid/16572030/Ob/1/Pt/0/sid/XMzE2MTc2NjQw/v.swf" quality="high" width="480" height="420" align="middle" allowScriptAccess="sameDomain" type="application/x-shockwave-flash"></embed></div>
+
+<video controls src="aes-demo/out.m3u8">
+</video>
+</body>
+</html>
