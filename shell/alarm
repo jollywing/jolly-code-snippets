@@ -1,0 +1,28 @@
+#! /bin/bash
+# Description: branch from 10 minutes timer
+# create: 2010-05-11
+# Last Change: 2010-05-11
+# Maintainer: Jiqing Wu (jiqingwu@gmail.com)
+# Version: 0.1
+
+if [ $# -ne 1 ]; then
+    echo "Usage: $0 interval"
+    exit 1
+fi
+
+# the return value of xmessage will write into $?
+while [ $? -ne 201 ]; do
+    sleep $1m
+    xmessage -center -buttons CONTINUE:200,EXIT:201 "
+ $1 minutes time up,
+
+ @@@@@   @@@@@@  @          @     @   @ 
+ @    @  @       @         @ @     @ @ 
+ @@@@@   @@@@@@  @        @   @     @ 
+ @ @     @       @        @@@@@    @ @
+ @   @   @       @       @     @  @   @
+ @     @ @@@@@@@ @@@@@@@ @     @ @     @
+
+"
+done
+

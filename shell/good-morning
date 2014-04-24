@@ -1,0 +1,19 @@
+#!/bin/sh
+
+# echo -n去掉echo语句后的换行符
+echo -n "Is it morning? Please answer yes or no: "
+read answer
+
+# 使用"$answer"而不是$answer，可以避免用户输入空字符串时出错
+if test "$answer" = "yes"
+then
+  echo "Good morning!"
+elif test "$answer" = "no"
+then
+  echo "Good afternoon!"
+else
+  echo "$answer not recognized. Enter yes or no"
+  exit 1
+fi
+
+exit 0

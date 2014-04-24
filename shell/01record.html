@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="Docutils 0.4.1: http://docutils.sourceforge.net/" />
+<title>record: 一个快速记录时间使用的shell小工具</title>
+<link rel="stylesheet" href="../../1summer.css" type="text/css" />
+</head>
+<body>
+<div class="document" id="record-shell">
+<h1 class="title">record: 一个快速记录时间使用的shell小工具</h1>
+<div class="contents topic">
+<p class="topic-title first"><a id="id1" name="id1">内容</a></p>
+<ul class="simple">
+<li><a class="reference" href="#id2" id="id7" name="id7">作品和作者信息</a></li>
+<li><a class="reference" href="#id3" id="id8" name="id8">用途</a></li>
+<li><a class="reference" href="#id4" id="id9" name="id9">使用帮助</a></li>
+<li><a class="reference" href="#id5" id="id10" name="id10">代码</a></li>
+</ul>
+</div>
+<div class="section">
+<h1><a class="toc-backref" href="#id7" id="id2" name="id2">作品和作者信息</a></h1>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">实现语言:</th><td class="field-body">Unix shell</td>
+</tr>
+<tr class="field"><th class="field-name">版本:</th><td class="field-body">0.1.3</td>
+</tr>
+<tr class="field"><th class="field-name">许可:</th><td class="field-body">GPL，你可以根据自己的需要自由地修改</td>
+</tr>
+<tr class="field"><th class="field-name">作者:</th><td class="field-body">Jiqing Wu</td>
+</tr>
+<tr class="field"><th class="field-name">邮箱:</th><td class="field-body"><a class="reference" href="mailto:jiqingwu&#64;gmail.com">jiqingwu&#64;gmail.com</a></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section">
+<h1><a class="toc-backref" href="#id8" id="id3" name="id3">用途</a></h1>
+<ul class="simple">
+<li>记录自己一天的时间是怎么使用的，如果你觉得一天不知不觉就晃过去了，
+你就可能需要这样的工具。</li>
+<li>你可能需要快速记录一些重要或有纪念意义的事，record就是个合适的工具。</li>
+<li>其实，它有点像离线的微型博客。</li>
+</ul>
+</div>
+<div class="section">
+<h1><a class="toc-backref" href="#id9" id="id4" name="id4">使用帮助</a></h1>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">$record</span></tt> ，如果有当天的记录，则打印这些记录。</li>
+<li><tt class="docutils literal"><span class="pre">$record</span> <span class="pre">your_record</span></tt> ，将 <tt class="docutils literal"><span class="pre">your_record</span></tt> 添加到今天记录。</li>
+<li><tt class="docutils literal"><span class="pre">$record</span> <span class="pre">--help</span></tt> 或者 <tt class="docutils literal"><span class="pre">$record</span> <span class="pre">-h</span></tt> ，显示帮助信息。</li>
+<li><tt class="docutils literal"><span class="pre">$record</span> <span class="pre">--version</span></tt> 或者 <tt class="docutils literal"><span class="pre">$record</span> <span class="pre">-v</span></tt> ，显示版本信息。</li>
+<li><tt class="docutils literal"><span class="pre">$record</span> <span class="pre">--list</span></tt> 或者 <tt class="docutils literal"><span class="pre">$record</span> <span class="pre">-l</span></tt> ，列出都有哪些记录。</li>
+<li><tt class="docutils literal"><span class="pre">$record</span> <span class="pre">--review</span> <span class="pre">yyyy-mm-dd</span></tt> 或者 <tt class="docutils literal"><span class="pre">$record</span> <span class="pre">-r</span> <span class="pre">yyyy-mm-dd</span></tt>
+打印指定日期的记录。</li>
+<li><tt class="docutils literal"><span class="pre">$record</span> <span class="pre">--comment</span> <span class="pre">your_comment</span></tt> 或者 <tt class="docutils literal"><span class="pre">$record</span> <span class="pre">-c</span> <span class="pre">your_comment</span></tt>
+对刚才的记录进行评论。</li>
+</ul>
+<p>当你开始使用 <tt class="docutils literal"><span class="pre">record</span></tt> 时， <tt class="docutils literal"><span class="pre">record</span></tt> 将在你的家目录下建立一个存放
+记录的目录 <tt class="docutils literal"><span class="pre">RECORD</span></tt> ，如果你不喜欢这个目录，你可以修改脚本中的
+<tt class="docutils literal"><span class="pre">root_dir</span></tt> 变量。</p>
+<p>如果你在2009年10月30日的12点钟添加了一条
+“看电影《斗牛》”的记录， 如果记录目录下没有 <tt class="docutils literal"><span class="pre">2009-10-30</span></tt> 这个文件，
+则会创建这个文件，并在该文件中添加 <tt class="docutils literal"><span class="pre">12:00</span> <span class="pre">看电影《斗牛》</span></tt> 这条记录。</p>
+</div>
+<div class="section">
+<h1><a class="toc-backref" href="#id10" id="id5" name="id5">代码</a></h1>
+<pre class="literal-block">
+#! /bin/sh
+
+# name : record
+# author: Jiqing Wu
+# email: jiqingwu&#64;gmail.com
+# version: 0.1
+# create: 2009-10-29
+# last Update: 2010-01-22
+
+# 说明：
+# 这是我写的用于记录自己时间使用的小工具，
+# 你也可以用它快速记录一些事情，类似微博
+
+# 记录的目标文件为~/RECORD/yyyy-mm-dd
+root_dir=$HOME/blog/40pim/RECORD
+file=$root_dir/`date +%F`
+
+version()
+{
+    sed -e 's/^    //' &lt;&lt;EndVersion
+    record -- record your activities.
+    version 0.1.3
+    author: Jiqing Wu (jiqingwu&#64;gmail.com)
+    release date: 2009-10-29
+    last updated: 2010-01-22
+    License: GPL, http://www.gnu.org/copyleft/gpl.html
+EndVersion
+}
+
+help()
+{
+    sed -e 's/^    //' &lt;&lt;EndHelp
+    Usage: record [option] | [your_record]
+
+    Without arguments, if there is record file of today,
+    print all records of today.
+
+    record your_record -- append your_record to the records of today.
+
+    -v, --version: show version.
+    -h, --help: show this help.
+    -l, --list: list all records.
+    -r date, --review date: check the records of the date.
+        The format of date is yyyy-mm-dd
+    -c your_comment, --comment your_comment:
+        comment the last activity.
+EndHelp
+}
+
+review()
+{
+    if [ -z $1 ]; then
+        echo &quot;Usage: record --review yyyy-mm-dd&quot;
+    else
+        old_file=$root_dir/$1
+        if [ -f $old_file ]; then
+            cat $old_file
+        else
+            echo &quot;There are not records of $1&quot;
+        fi
+    fi
+}
+
+comment()
+{
+    if [ -z $1 ]; then
+        echo &quot;Usage: record --comment &lt;your_comment&gt;&quot;
+    else
+        echo &quot;      &lt; $1 &gt;&quot; &gt;&gt; $file
+    fi
+}
+
+
+if [ -z $1 ]; then
+    #如果不加参数，并且目标文件不存在，显示警告信息
+    if [ ! -f $file ]; then
+        echo &quot;record what?&quot;
+    #如果不加参数，并且目标文件存在，输出记录内容
+    else
+        cat $file
+    fi
+    exit 0
+fi
+
+# 如果目标文件夹不存在，建立该文件夹
+if [ ! -d $root_dir ]; then
+    mkdir $root_dir
+fi
+
+case $1 in
+    --help|-h) help;;
+    --version|-v) version;;
+    --list|-l) ls $root_dir;;
+    --review|-r) review &quot;$2&quot;;;
+    --comment|-c) comment $2;;
+    *) echo `date +%H:%M` $* &gt;&gt; $file;;
+esac
+
+exit 0
+</pre>
+<p><strong>代码的使用方法</strong></p>
+<ul class="simple">
+<li>复制以上代码到一个名为record的文件中。你也可以直接在 <a class="reference" href="http://code.google.com/p/girl-sword/downloads/list">这里</a> 下载。</li>
+<li>chmod +x record，让record具有可执行权限。</li>
+<li>把record 放入PATH变量指定的一个目录中，就可以使用record了。</li>
+</ul>
+</div>
+</div>
+</body>
+</html>

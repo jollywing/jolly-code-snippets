@@ -1,0 +1,22 @@
+#!/bin/sh
+# program name: lsx
+# usage: show classified contents in current directory.
+# description: my second shell program, to practice for loop.
+# ver 1.0: 2008-10-31, only show dir
+# ver 1.1: 2008-10-31, show files and dirs
+
+echo "FILES:"
+for xx in $(ls); do
+  if [ -f $xx ]; then
+    echo "  $xx"
+  fi
+done
+
+echo "DIRS:"
+for xx in $(ls); do
+  if [ -d $xx ]; then
+    echo "  $xx"
+  fi
+done
+
+exit 0

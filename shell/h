@@ -1,0 +1,46 @@
+#!/bin/sh
+
+# note! play music need playsound, which is provided by libsdl-sound
+
+lyric_doc=$HOME/.blog/01poem/docs/BaiXiangCiPu.pdf
+debian_doc=$HOME/.blog/10linux/docs/debian-ref.pdf
+ubuntu_doc=$HOME/.blog/11cli/docs/ubuntu-linux-cli.pdf
+cli_doc=/home/jiqing/.blog/11cli/docs/unixtoolbox.pdf
+vim_doc=$HOME/.blog/14vim/docs/vim7-manual-cn.pdf
+makefile_doc=$HOME/.blog/30linux/docs/write-makefile.pdf
+latex_doc=$HOME/.blog/21tex/docs/lshort-cn-2007.pdf
+gtd_doc=$HOME/.blog/40gtd/docs/get-things-done.pdf
+think=$HOME/.freemind/freemind.sh
+
+pdfviewer=/usr/bin/xpdf
+
+help()
+{
+    sed -e 's/^    //' <<EndHelp
+    Usage: h <something>
+
+    <something> may be:
+    * lyrics: show BaiXiangCiPu.
+    * debian: show the help doc of debian.
+    * ubuntu: show the help doc of ubuntu.
+    * cli: show the unix command line toolbox.
+    * vim: show the manual of vim7.
+    * makefile: show the tutorial of makefile.
+    * latex: show the tutorial of latex.
+    * think: start up freemind.
+    * gtd: Get things done.
+EndHelp
+}
+
+case $1 in
+    lyrics) $pdfviewer $lyric_doc &;;
+    debian) $pdfviewer $debian_doc &;;
+    ubuntu) $pdfviewer $ubuntu_doc &;;
+    cli) $pdfviewer $cli_doc &;;
+    vim) $pdfviewer $vim_doc &;;
+    makefile) $pdfviewer $makefile_doc &;;
+    latex) $pdfviewer $latex_doc &;;
+    gtd) $pdfviewer $gtd_doc &;;
+    think) sh $think &;;
+    *) help;;
+esac

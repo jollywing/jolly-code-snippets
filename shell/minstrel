@@ -1,0 +1,26 @@
+#!/bin/sh
+# program name: minstrel
+# usage: music player
+# description: my third shell program, to practice while loop
+# author: jiqing Wu
+# ver 0.51, 2008-10-31, be able to play mp3 in current directory.
+# Help: ctrl+c -- the next song
+
+while true; do
+  for song in $(ls); do
+    if /usr/bin/file "$song"| grep -q MP3 ; then
+	  echo "+++++++ play list ++++++++++"
+      for lst in $(ls); do
+        if  /usr/bin/file "$lst" |grep -q MP3  ; then
+	      if [ "$lst" = "$song" ]; then
+	        echo "* $lst"
+    	  else
+    	    echo "- $lst"
+    	  fi
+	    fi
+	  done
+	  echo "++++++++++++++++++++++++++++"
+	  playsound $song
+    fi
+  done
+done
