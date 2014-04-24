@@ -1,3 +1,4 @@
 *.o
 *.exe
+*.class
 a.out
