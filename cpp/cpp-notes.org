@@ -1,0 +1,3 @@
+
+Whenever ordinary integers and unsigned integers combine in an expression,
+the ordinary integers are converted to unsigned.

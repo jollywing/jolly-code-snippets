@@ -3,7 +3,7 @@
 #include <iomanip>              // define setprecision
 #include <ios>                  // define streamsize
 #include <vector>
-#include <algorithm>            // define sort()
+#include <algorithm>            // define sort(a, b), max(a, b),
 
 using std::cout; using std::endl;
 using std::cin;
@@ -35,6 +35,12 @@ int main()
     // On Linux, end-of-file is newline followed by C-d.
     cout << "Input your homework scores, end with end-of-file: " << endl;
     double score;
+
+    // v.begin(); get the first element
+    // v.end(); get the last element
+    // v[i]; get the ith element
+    // v.size(); get the count of elements
+    // v.push_back(e); append an element `e' to v.
     vector<double> scores;
     // If cin ecounters end-of-file, reading will fail.
     // If cin reads a incompatible type input with the variable, reading will also fail.
