@@ -2,11 +2,13 @@
 #include <iostream>
 #include <ios>                  // define streamsize
 #include <iomanip>              // define setw
+#include <cstring>
 #include <assert.h>
-using std::cout;
+using std::cout; using std::cin;
 using std::endl;
 using std::streamsize; using std::setprecision;
 using std::setw; using std::setfill;
+using std::string;
 
 void TestCoutWidth()
 {
@@ -75,11 +77,21 @@ void TestPrecision()
     cout << endl;
 }
 
+void TestCinGetline()
+{
+    string s;
+    cout << "Input a string:" << endl;
+    // It's equal to: cin >> s;
+    getline(cin, s);
+    cout << "You just Inputed: " << s << endl;
+}
+
 int main()
 {
     TestCoutWidth();
     TestCoutFill();
     TestCoutAlign();
     TestPrecision();
+    TestCinGetline();
     return 0;
 }

@@ -1,8 +1,11 @@
 
 #include <iostream>
+#include <cstring>
+#include <assert.h>
 using namespace std;
 
-int main(int argc, char *argv[]){
+void TestStringConstruct()
+{
     cout << "string str1(10, 'B') GET: ";
     string str1(10, 'B');
     cout << str1 << endl;
@@ -18,23 +21,70 @@ int main(int argc, char *argv[]){
     cout << "string str4(str2, 0, 5); GET: ";
     string str4(str2, 0, 5);
     cout << str4 << endl;
+}
 
+void TestStringIterate()
+{
+    string s = "CPPUNIT";
+    assert(s.length() == s.size());
+
+    cout << "List string: " << s << endl;
     // size() of length() 返回字符串对象的字符数
     // str2.at(i) == str2[i]
-    for(int i = 0; i < str4.size(); i++) {
-        cout << i << " of str4: " << str2[i] << endl;
+    for(int i = 0; i < s.size(); i++) {
+        cout << i << " : " << s[i] << endl;
     }
 
+    cout << "ITERATOR: ";
+    string::iterator the_iterator;
+    for(the_iterator = s.begin();
+        the_iterator != s.end();
+        the_iterator++)
+        cout << *the_iterator << '\t';
+    cout << endl;
+
+    // rbegin() 返回一个逆向迭代器
+    cout << "REVERSED ITERATOR: " << endl;
+    string::reverse_iterator the_r_iterator;
+    for(the_r_iterator = s.rbegin();
+        the_r_iterator != s.rend();
+        the_r_iterator++)
+        cout << *the_r_iterator << '\t';
+    cout << endl;
+}
+
+void TestStringCompare()
+{
     // ==, >, <, >=, <=, !=
-    if(str4 == "Hello"){
-        cout << "String object can be compared with const string!" << endl;
-    }
+    string s("Hello");
+    assert(s == "Hello");
+    assert(s <= "Hillo");
+}
 
-    string str5 = str4 + ", sun shine!";
-    cout << str5 << endl;
+void TestStringConcat()
+{
+    string s = "AA";
+    string s2 = s + "BB";
+    assert(s2 == "AABB");
 
-    str4 += ", my family!";
-    cout << str4 << endl;
+    s += "CC";
+    assert(s == "AACC");
+}
+
+void TestSubString()
+{
+    cout << "Test SubString ..." << endl;
+    string a = "I'll Test substr method.";
+    cout << a << endl;
+    // Get substring from 5 to (5 + 4 - 1)
+    string b = a.substr(5, 4);
+    cout << b << endl;
+    assert( b == "Test");
+    cout << "Test SubString SUCCESS!" << endl;
+}
+
+int main(int argc, char *argv[]){
+
 
     // APPEND
     // basic_string &append( const basic_string &str );
@@ -50,29 +100,12 @@ int main(int argc, char *argv[]){
     // basic_string &assign( const basic_string &str, size_type index, size_type len );
     // basic_string &assign( size_type num, char ch );
 
-    cout << "ITERATOR: ";
-    string::iterator the_iterator;
-    for(the_iterator = str4.begin();
-        the_iterator != str4.end();
-        the_iterator++)
-        cout << *the_iterator;
-    cout << endl;
-
-    // rbegin() 返回一个逆向迭代器
-    cout << "REVERSED: " << endl;
-    string::reverse_iterator the_r_iterator;
-    for(the_r_iterator = str4.rbegin();
-        the_r_iterator != str4.rend();
-        the_r_iterator++)
-        cout << *the_r_iterator;
-    cout << endl;
 
     // return a const c string
     // const char *c_str();
 
-    cout << "The size of str4 is " << str4.length() << endl;
-    cout << "The max size of str4 is " << str4.max_size() << endl;
-    cout << "The capacity of str4 is " << str4.capacity() << endl;
+    // cout << "The max size of str4 is " << str4.max_size() << endl;
+    // cout << "The capacity of str4 is " << str4.capacity() << endl;
 
     // COMPARE: if this < str, return <0; if this == str, return 0; if this > str, return >0
     // int compare( const basic_string &str );
@@ -102,8 +135,12 @@ int main(int argc, char *argv[]){
     str6.erase(10, 5);
     cout << str6 << endl;
 
+    TestStringConstruct();
+    TestStringIterate();
+    TestStringCompare();
+    TestStringConcat();
     // SUBSTR
-    // basic_string substr( size_type index, size_type num = npos );
+    TestSubString();
 
     return 0;
 }

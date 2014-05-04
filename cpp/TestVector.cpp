@@ -14,6 +14,17 @@ void TestVector(vector<char> &v)
     v.push_back('b');
     vector<char>::size_type size = v.size();
     assert(size == 2);
+
+    vector<char> temp;
+    temp.push_back('c');
+    temp.push_back('d');
+    temp = v;
+    assert(temp[0] == v[0]);
+
+    // modifying to 'temp' won't change 'v'
+    temp.erase(temp.begin());
+    assert(temp.size() == 1);
+    assert(v.size() == 2);
 }
 
 template<typename T>
