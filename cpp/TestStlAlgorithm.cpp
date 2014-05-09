@@ -2,6 +2,7 @@
 #include <assert.h>
 #include <iostream>
 #include <numeric>              // define accumulate
+#include <cctype>
 
 using std::cout; using std::endl;
 using std::accumulate;
@@ -40,9 +41,45 @@ void TestAccumulate()
     assert(s == "SunShine");
 }
 
+void TestCopy()
+{
+    std::string s = "Heart";
+    std::string s1 = "Warm";
+}
+
+void TestRemove()
+{
+}
+
+void TestFind()
+{
+    std::string s("See you later.");
+    // if 'y' can not be found, return s.end()
+    std::string::iterator it = find(s.begin(), s.end(), 'y');
+    assert(it != s.end());
+
+    std::string s1("later");
+    it = search(s.begin(), s.end(), s1.begin(), s1.end());
+    assert(it != s.end());
+
+    std::string s2;
+    assert(s2.size() == 0);
+    it = search(s.begin(), s.end(), s2.begin(), s2.end());
+    assert(it == s.begin());
+
+    std::string s3("Later");
+    it = search(s.begin(), s.end(), s3.begin(), s3.end());
+    assert(it == s.end());
+
+    // If ispunct(c), return the iterator
+    it = find_if(s.begin(), s.end(), ispunct);
+    assert(*it == '.');
+}
+
 int main()
 {
     TestArraySize();
     TestAccumulate();
+    TestFind();
     return 0;
 }
