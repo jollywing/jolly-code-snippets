@@ -24,7 +24,8 @@ int main(int argc, char *argv[])
     a = "Null";
     cout << r1 << endl;
 
-    // 引用可以被重新赋值？对g++来说是可以的。
+    // 引用不可以重新赋值
+    // 这里并不是让r1引用b，而是用b给r1引用的a赋值。
     r1 = b;
     cout << r1 << endl;
     a.erase();
