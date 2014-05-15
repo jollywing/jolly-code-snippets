@@ -2,3 +2,4 @@
 *.exe
 *.class
 a.out
+*.pyc

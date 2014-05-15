@@ -1,0 +1,32 @@
+.. -*- rst -*-
+
+DONE
+==============================
+
+version 0.9.4 (2012-07-14)
+------------------------------
+
+- Simplify Meridian matrix to 500x500.
+- Refine Topology.load_latency_matrix()
+
+version 0.9.8 (2012-07-15)
+------------------------------
+
+- Refine delay sensitive overlay construction algorithm
+- Add random latency matrix
+- refine latency matrix for flash crowd
+- clear code, remove support for push-pull streaming
+
+version 1.0.2 (2012-07-21)
+------------------------------
+
+- Refine Peer.endurable_pull() for file sharing
+- Fix bug: stating the average response time of Peer.rf_pull()
+- Refine Peer.greedy_pull() for file sharing
+- Refine Peer.dealine_pure_serv()
+
+TODO
+==============================
+
+- refine Peer.maintain_nbrs()
+- print the seq_num of sampled peer
