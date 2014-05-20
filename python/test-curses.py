@@ -12,8 +12,8 @@ screen.box()
 y,x = screen.getmaxyx()
 
 text = "This is a TEst."
-cur_x = x / 2 - len(text)/2
-cur_y = y / 2
+cur_x = int(x / 2 - len(text)/2)
+cur_y = int(y / 2)
 screen.addstr(cur_x, cur_y, text)
 screen.refresh()
 
