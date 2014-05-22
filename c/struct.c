@@ -2,15 +2,17 @@
 #include <assert.h>
 #include <string.h>
 
+int global_var = 0;
+
 typedef struct {
-    int age;
+    int _age;
     /* memory align, sex will take 4 bytes */
     char sex;
     int grade;
 } Student;
 
 typedef struct {
-    int age;
+    int _age;
     char sex;
     char level;
     char field[4];
@@ -29,7 +31,7 @@ void test_struct_memset()
 {
     Student s;
     memset(&s, 0, sizeof(s));
-    assert(s.age == 0);
+    assert(s._age == 0);
     assert(s.sex == '\0');
     assert(s.grade == 0);
 }
