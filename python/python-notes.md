@@ -152,22 +152,26 @@ unicode字符串，以 `u` 或 `U`引导。
 
 字符串可以用 `+` 做拼接操作。比如 'a' + 'b' 会得到 'ab'.
 也可以用 `*` 做重复拼接。比如 'La' * 3 会得到 'LaLaLa'.
-### 列表和元组 ###
+
+### 列表 ###
 
 列表和元组可以存储不同类型的对象。
-元组可以看成只读的列表，元素的个数不能增加，元素的值也不可更改。
 元素之间用逗号间隔，从0开始索引。
-`aList[2:]` 从索引为2的元素到最后一个元素。
-`aList[:3]` 从索引为0的元素到索引为2的元素。
-`aList[-1]` 索引最后一个元素。
-`aList[-2]` 倒数第2个元素。
-`aList[-len(aList)]` 第一个元素。
 
 切片操作： `aList[start:end]`, 截取从start到end的子列表，但不包括end位置的元素。
+`aList[0:3]` 并不包含索引为3的元素。
 如果不指定start，start = 0
 如果不指定end, end = len(aList)
 
-`aList[0:3]` 并不包含索引为3的元素。
++ `aList[2:]` 从索引为2的元素到最后一个元素。
++ `aList[:3]` 从索引为0的元素到索引为2的元素。
++ `aList[-1]` 索引最后一个元素。
++ `aList[-2]` 倒数第2个元素。
++ `aList[-len(aList)]` 第一个元素。
+
+用append添加元素。
+del mylist[0] 删除第一个元素。
+mylist.sort() 返回一个排好序的列表。
 
 Python有个非常高级的特性就是列表解析，
 如 ``[x ** 2 for x in range(4)]``
@@ -177,42 +181,58 @@ Python有个非常高级的特性就是列表解析，
 
 enumerate(aList)会返回一个元组列表，每个元组的形式如(索引,元素)。
 
+### 元组 ###
+
+元组可以看成只读的列表，元素的个数不能增加，元素的值也不可更改。
+用 `()` 定义一个元组， 如
+
+    a_tuple = ('BeiJin', 'NanJin', 'ShangHai')
+
+如果你定义一个只包含一个元素的元组，必须包含在元素后面加一个 `,`
+否则，括号会被忽略。
+
+    t = (1,)
+
 ### 字典 ###
 
-.. {{{2
+    d = {key1: value1, key2: value2}
 
-建立一个字典：::
+key必须是不可变的值，且不能重复。
+value可以是变量。
 
-  dict1 = {}
-  dict2 = {'animal':'dog', 'port':80}
+建立一个字典：
 
-访问字典中的元素：::
+    dict1 = {}
+    dict2 = {'animal':'dog', 'port':80}
 
-  for key in dict2.keys():
-    print '%s:%s' % (key, dict2[key])
+访问字典中的元素：
 
-想看字典中是否有某个键值：::
+    for key in dict2.keys():
+      print '%s:%s' % (key, dict2[key])
 
-  if 'dog' in dict2:
-    print True
+或
 
-  if 'dog' not in dict2:
-    print False
+    for name, address in d.items():
+        print 'Contact %s at %s' % (name, address)
 
-给字典添加元素：::
+想看字典中是否有某个键值：
 
-  # 如果dict2中有ip键，则更新值，否则是添加
-  dict2['ip'] = '192.168.1.234'
+    if 'dog' in dict2:
+      print True
+  
+    if 'dog' not in dict2:
+      print False
 
-删除字典中的元素：::
+给字典添加元素：
 
-  del dict2['ip']
-  dict2.clear()     #清空所有元素
-  del dict2     #销毁dict2
+    # 如果dict2中有ip键，则更新值，否则是添加
+    dict2['ip'] = '192.168.1.234'
 
-.. }}}2
+删除字典中的元素：
 
-.. }}}1
+    del dict2['ip']
+    dict2.clear()     #清空所有元素
+    del dict2     #销毁dict2
 
 
 -------------------------------------------------------------------------------
@@ -269,31 +289,103 @@ range(n)是从0到n-1。
 
     0 2 4
 
-函数
-------------------------------
+## 函数 ##
 
-.. {{{2
+### docstring ###
+
+用三个单引号或是双引号包围的是 docstring.
+可以用docstring做函数的文档。
+
+
+    def print_max(a, b):
+        ''' Given two integers, print the max. '''
+        if a > b:
+            print(a)
+        else:
+            print(b)
+    
+    print(print_max.__doc__)
+
+用 `help(print_max)` 也会显示`print_max`的docstrin.
+
+文档字符串的惯例是一个多行字符串，它的首行以大写字母开始，句号结尾。第二行是空行，从第三行开始是详细的描述。 强烈建议 你在你的函数中使用文档字符串时遵循这个惯例。
+
+### 返回值 ###
 
 函数在调用前必须先定义，如果函数没有return语句，就自动返回None对象。
+对于一个没有 return 的函数，你可以通过 `print foo()` 来验证看是不是返回None.
+
+对于暂时未定义的函数，你可以在函数内使用 `pass`
+
+    def bar():
+        pass
+
+### 默认参数 ###
 
 函数的参数可以有一个默认值，如
 
-::
+    def foo(debug=True):
+      if debug:
+        print 'DEBUG MODE!'
+      print 'done'
 
-  def foo(debug=True):
-    if debug:
-      print 'DEBUG MODE!'
-    print 'done'
+只有在形参表末尾的那些参数可以有默认参数值，即你不能在声明函数形参的时候，先
+声明有默认值的形参而后声明没有默认值的形参。这是因为赋给形参的值是根据位置而
+赋值的。例如，def func(a, b=5)是有效的，但是def func(a=5, b)是 无效 的。
 
-.. }}}2
+### 关键参数 ###
 
-.. }}}1
+我们可以通过参数名称来给参数传值，使用名称，可以不遵守函数定义中参数的顺序。
+如：
 
-面向对象
-==============================
+    def foo(a, b = 'a', c = 'Hello'):
+        print a, b, c
 
-组织大的项目
-==============================
+    foo('HaHa', c = 'Yes')
+    foo(b = 'Rain', a = 'Me')
+    foo('Snow', 'Day')
+
+### 全局变量 ###
+
+函数内声明的变量都是局部变量。
+要想在函数内使用全局变量，用 `global` 修饰该变量。
+
+    x = 10
+
+    def foo():
+        global x
+        print(x)
+
+一条global语句可以指定多个全局变量。
+
+    global x, y, z
+
+
+## 模块 ##
+
+    import sys
+    
+    # avoid this, it makes you program hard to read, and may result in name confictions.
+    from sys import *
+
+每个以 .py 为扩展名的python程序都是一个模块。
+比如我们写了 module_a.py， 里面定义了一个 shit 函数。
+我们可以这样使用：
+
+    import module_a
+    module_a.shit()
+
+也可以这样：
+
+    from module_a import shit
+    shit()
+
+dir函数来列出模块定义的标识符。标识符有函数、类和变量。
+
+当你为dir()提供一个模块名的时候，它返回模块定义的名称列表。如果不提供参数，它返回当前模块中定义的名称列表。
+
+## 类和对象 ##
+
 
 文件操作
 ==============================
