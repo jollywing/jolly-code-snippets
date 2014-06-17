@@ -1,6 +1,6 @@
 #include "bookdb.h"
 
-Book::Book(string _title, string _author, string _year)
+Book::Book(string _title, string _author, int _year)
 {
     title = _title;
     author = _author;

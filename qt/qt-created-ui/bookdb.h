@@ -1,12 +1,17 @@
 #ifndef BOOKDB_H
 #define BOOKDB_H
 
+#include <string>
+#include <vector>
+using std::string;
+using std::vector;
+
 struct Book
 {
     string title;
     string author;
     int publish_year;
-    Book(string _title, string _author, string _year);
+    Book(string _title, string _author, int _year);
 };
 
 class BookDB

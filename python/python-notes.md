@@ -398,11 +398,100 @@ dir函数来列出模块定义的标识符。标识符有函数、类和变量�
 
 ## 类和对象 ##
 
+### 类的变量 ###
 
-文件操作
-==============================
+    class CLS(object):
+        instance_count = 0
+        def __init__(self):
+            blabla...
 
-.. {{{1
+        def __del__(self):
+            unconstructor ...
+
+上面的 `instance_count` 就是类的变量，在类的实例里可以用 CLS.instance_count 访问它。
+
+### 继承 ###
+一个子类型在任何需要父类型的场合可以被替换成父类型，即对象可以被视作是父类的实例，这种现象被称为多态现象。
+
+使用父类的构造函数(python不会自动调用基类的构造函数)，和方法。
+
+    class Plant(object):
+        def __init__(self):
+            ... ...
+        def show(self):
+            ... ...
+
+    class Tree(Plant):
+        def __init__(self):
+            Plant.__init__(self)
+            ... ...
+        def show(self):
+            Plant.show(self)
+            ... ...
+
+
+### 特殊函数 ###
+
+- `__init__(self,...)` 在新建对象恰好要被返回使用之前被调用。
+- `__del__(self)`	恰好在对象要被删除之前调用。
+- `__str__(self)`	在我们对对象使用print语句或是使用str()的时候调用。
+- `__lt__(self,other)`	当使用 小于 运算符（<）的时候调用。类似地，对于所有的运算符（+，>等等）都有特殊的方法。
+- `__getitem__(self,key)`	使用x[key]索引操作符的时候调用。
+- `__len__(self)`	对序列对象使用内建的len()函数的时候调用。
+
+## 异常处理 ##
+
+    try:
+        do something...
+        do something...
+    except EOFERROR:
+        handle ...
+    except (Exception1, Exception2):
+        blablabla...
+    except:
+        handle ...
+
+    try:
+        blablabla...
+    except:
+        blablabla...
+    else:
+        blablabla...
+
+当没有异常发生，`else`子块会被执行。
+
+用 `raise` 抛出异常。
+
+    
+    class ShortInputException(Exception):
+        def __init__(self, length, atleast):
+            Exception.__init__(self)
+            self.length = length
+            self.atleast = atleast
+    
+    # if __name__ = main:
+    s = input('Input something:')
+    
+    try:
+        if len(s) < 3:
+            # use raise to throw exception.
+            # which to throw is a instance of subclass of Exception or Error
+            raise ShortInputException(len(s), 3)
+    # catch exception use except, where e is instance of ShortInputException
+    except ShortInputException as e:
+        print('Your input string is shorter than {}.'.format(e.atleast))
+    else:
+        print(s)
+    finally:
+        print('whatever I will say something.')
+
+上例中有 finally 子块。
+不管是否发生异常， finally子块都会被执行。
+
+## python标准库 ##
+
+### 文件操作 ###
+
 
 打开文件： ``handle = open(file_name, access_mode = 'r')``
 
@@ -411,10 +500,8 @@ dir函数来列出模块定义的标识符。标识符有函数、类和变量�
 
 用 ``handle.close()`` 关闭文件。
 
-.. }}}1
 
-网络编程
-============================
+## 网络编程 ##
 
 .. {{{1
 
@@ -427,5 +514,3 @@ python真是威武。
 
 .. }}}1
 
-pyGTK
-============================
