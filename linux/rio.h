@@ -12,6 +12,8 @@ typedef struct{
 }rio_t;
 
 void rio_readinitb(rio_t *rp, int fd);
+
+void rio_readinitb(rio_t *rp, int fd);
 ssize_t rio_readlineb(rio_t *rp, char *usrbuf, size_t maxlen);
 ssize_t rio_readnb(rio_t *rp, char *usrbuf, size_t n);
 

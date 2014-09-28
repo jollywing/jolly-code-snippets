@@ -153,7 +153,7 @@ ssize_t rio_readnb(rio_t *rp, char *usrbuf, size_t n)
     return (n - nleft);
 }
 
-int main(void)
+void test_rio(void)
 {	
     rio_t rio;
 	int fd = open("demo.txt", O_RDWR, 0);
@@ -162,5 +162,4 @@ int main(void)
 	int count = rio_readlineb(&rio, usrbuf, 256);
 	printf("the line has %d letters\n", count);
     printf("%s\n", usrbuf);
-    return 0;
 }
