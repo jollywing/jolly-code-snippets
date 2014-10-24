@@ -3,6 +3,7 @@
 #include <netdb.h>
 
 #include <strings.h>
+#include <string.h>
 #include <stdlib.h>
 #include <stdio.h>
 
@@ -34,6 +35,28 @@ int open_clientfd(char *hostname, int port)
     return clientfd;
 }
 
+void test_localhost()
+{
+    int clientfd = open_clientfd("localhost", 6000);
+    if(clientfd > 0){
+        char buf[512];
+        while(1){
+            bzero(buf, 512);
+            /* read string */
+            scanf("%s", buf);
+            /* if EOF, then exit while */
+            if(buf[0] == 0)
+                break;
+            /* else send string */
+            else {
+                printf("[client] your input is: %s, size: %d\n", buf, strlen(buf));
+                write(clientfd, buf, strlen(buf));
+            }
+        }
+        close(clientfd);
+    }
+}
+
 int main(int argc, char **argv)
 {
     int clientfd = open_clientfd("www.baidu.com", 80);
@@ -42,5 +65,6 @@ int main(int argc, char **argv)
         close(clientfd);
     }
 
+    test_localhost();
     return 0;
 }
