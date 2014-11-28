@@ -1,0 +1,341 @@
+<html>
+  <head>
+    <title>Javascript Sand Box</title>
+    <meta charset='utf-8'/>
+    <!-- import external js
+    <script src="xxx.js"></script> -->
+    <script>
+     function ShowMessage(){
+       var area = document.getElementById("message");
+       if (area.innerHTML != ""){
+         area.innerHTML = "";
+       } else {
+         area.innerHTML = "<p>Can You see me?</p>";
+       }
+     }
+     
+     function ChangeLight(){
+       var img = document.getElementById("lightimage");
+       if(img.src.match("bulbon")){
+         img.src="image/pic_bulboff.gif";
+       }
+       else {
+         img.src="image/pic_bulbon.gif";
+       }
+     }
+
+     function ChangeHeadColor(){
+       var head = document.getElementById("mainhead");
+       if(head.style.color == "black")
+       head.style.color="red";
+       else
+       head.style.color="black";
+     }
+     
+     function OnInput(){
+       var box = document.getElementById('input_box');
+       var hint_box = document.getElementById('input_hint');
+       hint_box.innerHTML = box.value;
+     }
+    </script>
+  </head>
+  <body>
+    <script>
+     document.write("<h1 id='mainhead'>Hello, the World!</h1>");
+     document.write("<p>Use <i>document.write</i> on loading. If you use <i>document.write</i> after the page is loaded, the old page content will be flushed.</p>");
+    </script>
+    <input type="button" value="Click me" onclick="ShowMessage()">
+
+    <div id="message">
+      <script>document.write("");</script>
+    </div>
+
+    <p>
+    <img id="lightimage" src="image/pic_bulboff.gif" width="50" height="90"
+         onclick="ChangeLight()">
+    Click the light!
+    </p>
+
+    <button type="button" onclick="ChangeHeadColor()">Change Headline's color!</button>
+
+    <hr>
+
+    <p>
+      Get Date use <b>Date()</b>:<br>
+      <button onclick="this.innerHTML = Date()">Click me to Get Time</button>
+    </p>
+
+    <p>Get input:
+      <input id='input_box' type="text" width="30" onkeydown="OnInput()">
+      <div id='input_hint'></div>
+    </p>
+    <hr>
+
+    <p>HTML EVENTS:
+      <ul>
+        <li>onchange</li>
+        <li>onclick</li>
+        <li>onmouseover</li>
+        <li>onmouseout</li>
+        <li>onkeydown</li>
+        <li>onload</li>
+      </ul>
+      <ul>
+        <li>document.addEventListener('mousemove', myFunction);</li>
+        <li>document.removeEventListener('mousemove', myFunction);</li>
+      </ul>
+    </p>
+    <hr>
+
+    <p>output to console with <b>console.log(something)</b>:</p>
+    <script>
+     a = 5; b = 15; console.log(a + b);
+    </script>
+    <hr>
+
+    <p>Variable can started with '$'.
+      <script>
+       var $x;
+       $x = 5;
+       $x = $x * $x;
+       document.write("The value of $x: " + $x);
+       // clear variable by set it null
+       $x = null;
+      </script><br>
+      You can declare several <em>variables</em> in one statement.
+      such as <code> var i = 1, j, message='Hello'</code><br>
+      You can also seperate the statement into multi lines:
+      <pre>
+        var i = 1,
+        j,
+        message = 'Hello';
+      </pre>
+      Undefined variable: <code>var in</code>, <i>in</i> is a variable undefined.<br>
+      <script>/*var in; document.write(in);*/</script>
+    </p>
+    <p><strong>Javascript is dynamic language, a variable can be used as different type.</strong>
+    <pre>
+      var x = 5;
+      x = "John";
+    </pre></p>
+    <p><strong>如果您把值赋给尚未声明的变量，该变量将被自动作为全局变量声明。</strong></p>
+    <hr>
+
+    <p>Number:
+      <script>
+        document.write("123e5 outputed as: " + 123e5 + "<br>");
+        document.write("123e-5 outputed as: " + 123e-5 + "<br>");
+    </script></p>
+    <hr>
+
+    <p>Operator:<br>
+      <script>
+       var x = 5;
+       document.write('x = 5; <br>');
+       document.write('x == "5" ?' + (x == "5") + "<br>");
+       document.write('x == 5 ?' + (x == 5) + "<br>");
+       document.write('x === "5" ?' + (x === "5") + "<br>");
+       document.write('x === 5 ?' + (x === 5) + "<br>");
+       document.write('x > 0 && x < 6?' + (x > 0 && x < 6) + '<br>');
+       document.write('x > 0 || x < 6?' + (x > 0 || x < 6) + '<br>');
+       document.write('!(x == 5)' + !(x==5) + '<br>');
+      </script>
+      '===' 判断值和类型都相同. '!==' 判断值和类型不全相同。
+    </p>
+    <hr>
+
+    <p>String:<br>
+      <script>
+       var s = 'Building'; // s is a string
+       var s1 = new String('DogCat'); //s1 is an object
+       document.write("The word 'Building' has " + s.length + ' characters.<br>');
+       document.write("The 5th char in 'DogCast' is '" + s1[4] + "'.<br>");
+      </script>
+      <script>
+       document.write(12 + " = 6 + 6.");
+       // truncate line with '\'
+       document.write("<p>I feel \
+                      good.</p>");
+
+       /* You can not write as follow:
+          document.write \
+          ('hello, Javascript world!');*/
+       
+      </script></p>
+    <p><ol>
+      <li>charAt()	返回指定索引位置的字符</li>
+      <li>charCodeAt()	返回指定索引位置字符的 Unicode 值</li>
+      <li>concat()	连接两个或多个字符串，返回连接后的字符串</li>
+      <li>fromCharCode()	将字符转换为 Unicode 值</li>
+      <li>indexOf()	返回字符串中检索指定字符第一次出现的位置</li>
+      <li>lastIndexOf()	返回字符串中检索指定字符最后一次出现的位置</li>
+      <li>localeCompare()	用本地特定的顺序来比较两个字符串</li>
+      <li>match()	找到一个或多个正则表达式的匹配</li>
+      <li>replace()	替换与正则表达式匹配的子串</li>
+      <li>search()	检索与正则表达式相匹配的值</li>
+      <li>slice()	提取字符串的片断，并在新的字符串中返回被提取的部分</li>
+      <li>split()	把字符串分割为子字符串数组</li>
+      <li>substr()	从起始索引号提取字符串中指定数目的字符</li>
+      <li>substring()	提取字符串中两个指定的索引号之间的字符</li>
+      <li>toLocaleLowerCase()	根据主机的语言环境把字符串转换为小写，只有几种语言（如土耳其语）具有地方特有的大小写映射</li>
+      <li>toLocaleUpperCase()	根据主机的语言环境把字符串转换为大写，只有几种语言（如土耳其语）具有地方特有的大小写映射</li>
+      <li>toLowerCase()	把字符串转换为小</li>
+      <li>toString()	返回字符串对象值</li>
+      <li>toUpperCase()	把字符串转换为大写</li>
+      <li>trim()	移除字符串首尾空白</li>
+      <li>valueOf()	返回某个字符串对象的原始值</li>
+    </ol></p>
+    <hr>
+
+    <p>Javascript Boolean. <code>true</code> or <code>false</code><br>
+      <script>
+       var male = true;
+       if(male){
+         document.write("You are a man.");
+       }
+       else
+       document.write("You are a woman.");
+      </script>
+    </p>
+    <hr>
+
+    <p>Array: [1, 2, 3, 4, 5] * 2 =
+      <script>
+       // new empty array
+       var cars = new Array();
+       cars[0] = 'BMW';
+       cars[1] = 'BenZ';
+       cars[2] = 'Suzuki';
+
+       // new array with elements
+       var cellphones = new Array("HTC", "SamSung", 'Iphone');
+
+       // const array 
+       document.write("[");
+       var a = [1, 2, 3, 4, 5];
+       // get array length
+       for (var i = 0; i < a.length; i++){
+         a[i] = a[i] * 2;
+         document.write(a[i] + ",");
+       }
+       document.write("]");
+      </script></p>
+    <hr>
+
+    <p>Switch statement.<br>
+      <script>
+       var winner = 'XiaoGang';
+       switch(winner){
+         case 'XiaoHong':
+         case 'XiaoLi':
+         document.write("The winner is a girl.<br>");
+         break;
+         case 'XiaoMing':
+         document.write("The winner is a boy.<br>");
+         break;
+         default:
+         document.write("The winner is an animal.<br>");
+       }
+      </script>
+    </p>
+    <hr>
+
+    <p>For Statement<br>
+      <script>
+       var employees = new Array();
+       employees[0] = "LiGang";
+       employees[1] = "LiMiao";
+       employees[2] = "ZhangMin";
+       employees[3] = "YaoGuoZheng";
+       var i = 0;
+       for(x in employees){
+         document.write( i + ". " + employees[x] + '<br>');
+         i += 1;
+       }
+      </script>
+      For/in 用于遍历对象的属性.
+      <script>
+       var cat = {name: 'Miao', age: 1, host: 'Ming'};
+       var txt = '';
+       for(x in cat){
+         txt += cat[x] + '; ';
+       }
+       document.write(txt);
+      </script>
+    </p>
+    <hr>
+
+    <p>Object practice.
+      <script>
+       var me = {firstName: "Wing", lastName: "Jolly", age: 22, skill:"Writing"};
+       document.write('My Name is ' + me.lastName + ' ' + me.firstName +
+                      ", I'm " + me.age + ' years old. My remarkable skill is '
+                      + me.skill +'.<br>');
+
+       var com = {
+         logo:'Lenovo',
+         year: 2014,
+         price: 2500,
+         Cpu: 'intel',
+         show: function(){
+           // you must refer the property with this
+           document.write(this.logo + ': ' + this.year + ', ' + this.price + 'Yuan.');
+           document.write("<br>");
+         }
+       };
+       com.show();
+       document.write('The ' + com['logo'] + ' computer has a CPU of ' +
+                      com['Cpu'] + '.');
+           
+      </script></p>
+    <hr>
+
+    <p>表单验证.
+      <script>
+       function ValidateLogin(){
+         var nameBox = document.forms['form1']['name_box'];
+         var passBox = document.forms['form1']['pass_box'];
+         if(nameBox.value == null || nameBox.value == ""){
+           alert('Name can not be empty!');
+           return false;
+         }
+         if(passBox.value == null || passBox.value == ''){
+           alert('password can not be empty!');
+           return false;
+         }
+
+         if(ValidateEmail() == false){
+           alert('Email address is not legal!');
+           return false;
+         }
+
+         return true;
+       }
+
+       function ValidateEmail(){
+         var email = document.forms['form1']['email_box'].value;
+         var atpos = email.indexOf('@');
+         var dotpos = email.lastIndexOf('.');
+         if (atpos < 1 || dotpos < atpos + 2 || dotpos + 2 >= email.length)
+         return false;
+
+         return true;
+       }
+      </script>
+      <form name='form1' onsubmit='return ValidateLogin()'>
+        Name: <input name='name_box' type="text" width='20'><br>
+        Pass: <input name='pass_box' type='password' width='20'><br>
+        Email: <input name='email_box' type='text' width='15'><br>
+        <input type='submit' value='login' >
+      </form>
+    </p>
+
+    <p>document.writeln()<br>
+      <script>
+       // It doesn't change line in HTML
+       document.writeln(document.title + ':' + document.URL + '<br>');
+       document.writeln('Domain: ' + document.domain);
+      </script>
+    </p>
+  </body>
+</html>

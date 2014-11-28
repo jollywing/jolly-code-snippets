@@ -13,6 +13,9 @@ void read_char()
 {
     char c;
     char prompt[32] = "Input a char:\n";
+    /* STDOUT_FILENO is the file descriptor of STDOUT */
+    /* printf("%s", prompt) */
+    /* fprintf(stdout, "%s", prompt) */
     write(STDOUT_FILENO, prompt, strlen(prompt));
     while(read(STDIN_FILENO, &c, 1) > 0){
         write(STDOUT_FILENO, &c, 1);
@@ -40,6 +43,9 @@ void test_create_on_nonexist()
 
 void read_file_content()
 {
+    /* open(const char *pathname, int flags, mode_t mode); */
+    /* 如果 flags 中有 O_CREATE, 必须提供mode参数，用于指定新文件的权限, 这
+     * 个权限只会影响将来的访问，不会影响这次的文件描述符。 */
     int fd = open("demo.txt", O_RDONLY, 0);
     if(fd < 0){
         printf("Open demo.txt failed!\n");
@@ -73,6 +79,7 @@ void get_file_meta_data(const char* filename)
     char * filetype;
     char * readok, *writeok;
 
+    /* fill struct stat */
     stat(filename, &st);
 
     if(S_ISREG(st.st_mode))

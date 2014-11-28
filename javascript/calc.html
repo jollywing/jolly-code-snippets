@@ -1,0 +1,171 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Calculator</title>
+    <meta charset="utf-8" />
+    <style>
+     table {
+       border-style:solid;
+       border-width: 1px;
+       margin-left: auto;
+       margin-right: auto;
+       margin-top: auto;
+       margin-bottom:auto;
+       width: 200px;
+       height: 300px;
+     }
+
+     tr.button {
+       height: 18%;
+     }
+     /* td {
+     display: inline;
+     } */
+
+     td.led {
+       border-style:solid;
+       border-width: 2px;
+       background-color:#eeeeee
+       color:blue;
+       min-height: 40px;
+       vertical-align: middle;
+       text-align: right;
+       font-weight: bold;
+       font-size: 25px;
+     }
+
+     td {
+       border-style:solid;
+       border-width: 1px;
+       text-align: center;
+     }
+
+     td.button {
+       color: #004400
+       background-color:#cccccc
+       width: 25%;
+       min-height:20px;
+       margin: 5px;
+       padding: 2px;
+     }
+    </style>
+
+    <script>
+     var op = '';
+     var oldNumber = 0;
+     var newNumber = false;
+
+     function onMouseMoveButton(b){
+       b.style.backgroundColor='#bbbbff';
+     }
+
+     function mouseLeave(b){
+       b.style.backgroundColor='#ffffff';
+     }
+
+     function numberPressed(n){
+       var led = document.getElementById('result_scr');
+       if(newNumber == true){
+         led.innerHTML = '';
+         newNumber = false;
+       }
+       else if(led.innerHTML == '0' || led.innerHTML == 'Infinity' || led.innerHTML == 'NaN') led.innerHTML = '';
+
+       led.innerHTML += n;
+     }
+
+     function acPressed(){
+       var led = document.getElementById('result_scr');
+       led.innerHTML = '0';
+     }
+
+     function opPressed(new_op){
+       var led = document.getElementById('result_scr');
+       if(op == ''){
+         oldNumber = parseInt(led.innerHTML);
+         // alert(oldNumber);
+         op = new_op;
+         newNumber = true;
+       }
+       else {
+         if(newNumber == true){
+           op = new_op;
+         }
+         else {
+           var n = parseInt(led.innerHTML);
+           oldNumber = calc(op, oldNumber, n);
+           led.innerHTML = oldNumber;
+           op = new_op;
+           newNumber = true;
+         }
+       }
+     }
+
+     function equalPressed(){
+       if(op != ''){
+         if(newNumber == false){
+           var led = document.getElementById('result_scr');
+           var n = parseInt(led.innerHTML);
+           led.innerHTML = calc(op, oldNumber, n);
+         }
+         op = '';
+       }
+     }
+
+     function calc(opp, oldN, newN){
+       switch(opp){
+         case '+':
+         return oldN + newN;
+         break;
+         case '-':
+         return oldN - newN;
+         break;
+         case '*':
+         return oldN * newN;
+         break;
+         case '/':
+         return oldN / newN;
+         break;
+         default:
+         return 0;
+       }
+     }
+    </script>
+  </head>
+  <body>
+    <table>
+      <tr class='led'><td id='result_scr' class='led' colSpan='4'>0</td></tr>
+      <tr class='button'>
+        <td class='button' onclick='numberPressed(this.innerHTML)'
+            onmousemove='onMouseMoveButton(this)'
+            onmouseleave='mouseLeave(this)'>1</td>
+        <td class='button' onclick='numberPressed(this.innerHTML)'
+            onmousemove='onMouseMoveButton(this)'
+            onmouseleave='mouseLeave(this)'>2</td>
+        <td class='button' onclick='numberPressed(this.innerHTML)'
+            onmousemove='onMouseMoveButton(this)'
+            onmouseleave='mouseLeave(this)'>3</td>
+        <td class='button' onclick='opPressed(this.innerHTML)' onmousemove='onMouseMoveButton(this)' onmouseleave='mouseLeave(this)'>+</td>
+      </tr>
+      <tr class='button'>
+        <td onclick='numberPressed(this.innerHTML)' onmousemove='onMouseMoveButton(this)' onmouseleave='mouseLeave(this)'>4</td>
+        <td onclick='numberPressed(this.innerHTML)' onmousemove='onMouseMoveButton(this)' onmouseleave='mouseLeave(this)'>5</td>
+        <td onclick='numberPressed(this.innerHTML)' onmousemove='onMouseMoveButton(this)' onmouseleave='mouseLeave(this)'>6</td>
+        <td onclick='opPressed(this.innerHTML)' onmousemove='onMouseMoveButton(this)' onmouseleave='mouseLeave(this)'>-</td>
+      </tr>
+      <tr class='button'>
+        <td onclick='numberPressed(this.innerHTML)' onmousemove='onMouseMoveButton(this)' onmouseleave='mouseLeave(this)'>7</td>
+        <td onclick='numberPressed(this.innerHTML)' onmousemove='onMouseMoveButton(this)' onmouseleave='mouseLeave(this)'>8</td>
+        <td onclick='numberPressed(this.innerHTML)' onmousemove='onMouseMoveButton(this)' onmouseleave='mouseLeave(this)'>9</td>
+        <td onclick='opPressed(this.innerHTML)' onmousemove='onMouseMoveButton(this)' onmouseleave='mouseLeave(this)'>*</td>
+      </tr>
+      <tr class='button'>
+        <td onclick='numberPressed(this.innerHTML)' onmousemove='onMouseMoveButton(this)' onmouseleave='mouseLeave(this)'>0</td>
+        <td onclick='acPressed()' onmousemove='onMouseMoveButton(this)' onmouseleave='mouseLeave(this)'>AC</td>
+        <td onclick='equalPressed()' onmousemove='onMouseMoveButton(this)' onmouseleave='mouseLeave(this)'>=</td>
+        <td onclick='opPressed(this.innerHTML)' onmousemove='onMouseMoveButton(this)' onmouseleave='mouseLeave(this)'>/</td>
+      </tr>
+
+    </table>
+  </body>
+</html>
