@@ -1,0 +1,28 @@
+<!doctype html>
+<html>
+  <head>
+    <title></title>
+    <meta charset="utf-8" />
+    <script>
+     function match(name)
+     {
+       var re1 = /[\u4e00-\u9fa5]{2}行[\u4e00-\u9fa5]{2}支行/;
+       var re2 = /[\u4e00-\u9fa5]{2}行[\u4e00-\u9fa5]{2}分行/;
+       var re3 = /[\u4e00-\u9fa5]{2}行[\u4e00-\u9fa5]{2}分理处/;
+       if (re1.test(name) || re2.test(name) || re3.test(name)) {
+         return true;
+       }
+       return false;
+     }
+     var m = match('工商行黄浦支行');
+     console.log(m); //true
+     m = match('港行铁支行');
+     console.log(m); //false
+     m = match('农业行北京分理处');
+     console.log(m); //true
+    </script>
+  </head>
+  <body>
+
+  </body>
+</html>
