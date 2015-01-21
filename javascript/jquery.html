@@ -1,0 +1,51 @@
+<!doctype html>
+<html>
+  <head>
+    <title>JQuery practice</title>
+    <meta charset="utf-8" />
+    <script src="http://libs.baidu.com/jquery/1.10.2/jquery.min.js"></script>
+    <script>
+     $(document).ready(function() {
+       $("input#toggle-title").click(function() {
+         $("h1").toggle("fast");
+       });
+       $("pre").hover(function() {
+         $(this).css("background-color", "#ccf");
+       }, function() {
+         $(this).css("background-color", "#fff");
+       });
+       $("input#demo-text").focus(function() {
+         $(this).css("background-color", "#ccc");
+       });
+       $("input#demo-text").blur(function() {
+         $(this).css("background-color", "#fff");
+       });
+       $("input#fade-toggle").click(function() {
+         $('span.persons').fadeToggle(1000);
+       });
+       $('input#fade-btn').click(function() {
+         $(this).fadeTo('slow', 0.5);
+       });
+     });
+    </script>
+  </head>
+  <body>
+    <h1>唐诗三百首</h1>
+    <pre>
+      昔人已乘黄鹤去，此地空余黄鹤楼。
+      黄鹤一去不复返，白云千载空悠悠。
+      晴川历历汉阳树，芳草萋萋鹦鹉洲。
+      日暮乡关何处是？烟波江上使人愁。
+    </pre>
+    <input id='toggle-title' type='button' value='ClickMe'/>
+    <input id='demo-text' type='text' size='20' />
+    <p>
+      <span class='persons'>李白、杜甫、白居易</span>
+      <input id='fade-toggle' type='button' value='Fade Toggle'/>
+    </p>
+
+    <p>
+      <input id='fade-btn' type='button' value='点我我就会变淡'/>
+    </p>
+  </body>
+</html>
