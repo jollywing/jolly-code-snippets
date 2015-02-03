@@ -1,0 +1,145 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>basic win8</title>
+    <style>
+     *{font-family: "Segoe UI", Frutiger, "Frutiger Linotype";
+       color: #ccf; text-align: center; }
+     body{background-image:url('Win8Background.jpg');}
+
+     #wrapper {
+       width: 70%;
+       padding: 0px;
+       margin-left:auto;
+       margin-right:auto;
+       background-color: #ffc;
+     }
+     .sortable-list li {
+       padding: 4px;
+       margin: 4px;
+       float: left;
+       border: 1px solid black;
+       list-style-image: none;
+       list-style: none;
+       list-style-type: none;
+       background-color:#204558;
+     }
+
+     #dashboard-layout .item.normal {
+       width: 100px;
+       height: 240px;
+     }
+
+     #dashboard-layout .item.wide {
+       width: 224px;
+       height: 100px;
+     }
+
+     .item.normal p{
+       margin:0px;
+       padding: 0px;
+     }
+
+     .item.wide p{
+       margin:0px;
+       padding: 0px;
+     }
+
+     h1{color:white;
+        text-shadow: 2px 2px 4px #000;}
+
+     #left_head{width:45%; float:left;}
+     #right_head{width:45%; float:right; text-align:right;margin-right:15px;}
+    </style>
+
+    <script type="text/javascript" src="jquery-1.8.0.min.js"></script>
+    <script type="text/javascript" src="jquery-ui-1.8.23.custom.min.js"></script>
+    <script type="text/javascript">
+     function update_columns() {
+       var positions = []
+       $("#dashboard-layout .item").each(function() {
+         var $item = $(this);
+         positions.push($item.attr('id'));
+       });
+       $.post("./", { 'positions[]': positions },
+              function(data) {
+         alert("Update Success - New positions:" + positions);
+       }
+              );
+     }
+
+     $(function() {
+       $("ul.sortable-list").sortable({
+         connectWith: "#wrapper",
+         placeholder: 'ui-state-highlight',
+         tolerance: 'pointer',
+         revert: true,
+         forcePlaceholderSize: true,
+         forceHelperSize: true,
+         update: update_columns,
+       }).disableSelection();
+     });
+    </script>
+
+  </head>
+
+  <body>
+
+    <div id="left_head"><h1>Start</h1></div>
+    <div id="right_head"><h1>Lawrence Cherone</h1></div>
+    <div style="clear:both;"></div>
+
+    <div id="wrapper">
+
+      <ul class="sortable-list" id="dashboard-layout">
+
+        <li id="a" ondblclick="" class="item normal" style="background-image:url(xbox.png); background-size:110px 220px;">
+          content a
+        </li>
+
+        <li id="b" ondblclick="" class="item normal" style="background-image:url(xbox.png); background-size:110px">
+          content b
+        </li>
+
+        <li id="c" ondblclick="" class="item wide" style="background-image:url(photos.png); background-size:224px 220px">
+          content c
+        </li>
+
+        <li id="d" ondblclick="" class="item wide" style="background-image:url(photos.png); background-size:224px">
+          content d
+        </li>
+
+        <li id="e" ondblclick="" class="item wide" style="background-image:url(photos.png); background-size:224px">
+          content e
+        </li>
+
+        <li id="f" ondblclick="" class="item normal" style="background-image:url(xbox.png); background-size:110px">
+          content f
+        </li>
+
+        <li id="g" ondblclick="" class="item normal" style="background-image:url(xbox.png); background-size:110px">
+          content g
+        </li>
+
+        <li id="h" ondblclick="" class="item wide" style="background-image:url(photos.png); background-size:224px">
+          content h
+        </li>
+
+        <li id="i" ondblclick="" class="item wide" style="background-image:url(photos.png); background-size:224px">
+          content i
+        </li>
+
+        <li id="j" ondblclick="" class="item normal" style="background-image:url(xbox.png); background-size:110px">
+          content j
+        </li>
+
+        <li id="k" ondblclick="" class="item wide" style="background-image:url(photos.png); background-size:224px">
+          content k
+        </li>
+      </ul>
+
+    </div>
+
+  </body>
+</html>

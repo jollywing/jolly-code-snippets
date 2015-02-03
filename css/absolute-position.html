@@ -1,0 +1,55 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Absolute Position</title>
+    <meta charset="utf-8" />
+    <style type='text/css'>
+     div.absolute {position:absolute; top: 10em; left: 1em;
+                   background-color: #aaa;
+                   width: 50em; height: 10em;
+                   text-size: 0.8em;
+                   z-index: -1;}
+     pre {
+       text-color: #0f0;
+       text-shadow: 2px 2px 4px #ccf;
+       text-size: 0.5em;
+       line-height: 2em;
+     }
+     div.fixed {
+       position:fixed;
+       right: 0px;
+       top: 0px;
+       width: 20em;
+       height: 95%;
+       background-color: #000;
+       color: #0ff;
+       border-radius: 10px 0 0 10px;
+     }
+    </style>
+  </head>
+  <body>
+    <div class='fixed'>
+      <ul>
+          <li>Good</li>
+          <li>Bad</li>
+          <li>Ugly</li>
+      </ul>
+    </div>
+
+    <div class="absolute">
+      <ul>
+        <li style="font-weight:100;">Hello, good boy.</li>
+        <li style="font-weight:500;">Hello, pretty girls.</li>
+        <li style="font-weight:900;">Hello, world.</li>
+      </ul>
+    </div>
+    <h1>Absolute Position</h1>
+    <p>
+      <pre><code>
+        QUnit.test( "hello test", function( assert ) {
+          assert.ok( 1 == "1", "Passed!" );
+        });
+      </code></pre>
+    </p>
+  </body>
+</html>
