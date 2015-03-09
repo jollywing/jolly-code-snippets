@@ -1,17 +1,12 @@
 #include <stdio.h>
 
 void String_cat(char* dest, const char* str) {
-
     int count = 0;
-
     while (dest[count]) {
-
         count ++;
-
     }
 
     while ((*(dest+count++) = *str++));
-
 }
 
 int main()

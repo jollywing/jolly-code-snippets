@@ -44,6 +44,16 @@ void test_string_contain_zero(){
     assert(m[5] == 0);          /* PASS */
 }
 
+void test_memset(){
+    /* void* memset(void* s, int c, size_t n); */
+    char target[10] = "World";
+    /* replace first 5 characters with a given num */
+    /* As though the given num is larger than 255, only its lowest 8 bits are preserved. */
+    memset(target, 863, 5);
+    assert(target[2] == 95);
+    printf("memset result: %s\n", target);
+}
+
 int main(int argc, char *argv[])
 {
 
@@ -54,5 +64,6 @@ int main(int argc, char *argv[])
     test_change_string();
     test_string_copy();
     test_string_contain_zero();
+    test_memset();
     return 0;
 }
