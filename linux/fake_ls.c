@@ -41,7 +41,7 @@ void fake_ls(const char *path, size_t lvl)
 
         if(strcmp(item->d_name, ".") && strcmp(item->d_name, "..")){
                 for(i = 0; i < lvl; i++){
-                    strcat(file_name, "\t");
+                    strcat(file_name, "  ");
                 }
                 strcat(file_name, item->d_name);
 
