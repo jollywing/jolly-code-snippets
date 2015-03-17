@@ -49,8 +49,11 @@ void test_localhost()
                 break;
             /* else send string */
             else {
+                if(!strcmp(buf, "exit")){
+                    break;
+                }
                 printf("[client] your input is: %s, size: %d\n", buf, strlen(buf));
-                write(clientfd, buf, strlen(buf));
+                send(clientfd, buf, strlen(buf), 0);
             }
         }
         close(clientfd);

@@ -37,22 +37,25 @@ int main(int argc, char *argv[])
 {
     /* open listen fd */
     int listenfd = open_listenfd(6000);
-    if (listenfd < 0)
+    if (listenfd < 0){
+        fprintf(stderr, "listen failed!\n");
         return -1;
+    }
     /* accept */
     int connfd;
     // struct sockaddr addr;
     // socklen_t len;
-    if(connfd = accept(listenfd, NULL, NULL) > 0){
+    if((connfd = accept(listenfd, NULL, NULL)) > 0){
         printf("[server] conn fd: %d\n", connfd);
         char buf[512];
         int size;
         while(1){
             bzero(buf, 512);
             /* receive data */
-            size = recvfrom(connfd, buf, 512, MSG_WAITALL, NULL, NULL);
+            size = recv(connfd, buf, 512, 0);
             /* echo data */
             if(size > 0){
+                buf[size] = '\0';
                 printf("Your input is: %s\n", buf);
             }
         }
