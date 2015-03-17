@@ -1,0 +1,36 @@
+<form name="static" target="result" onsubmit="return validate(this);">
+    <p>username: <input type="text" name="user" /></p>
+    <p>password: <input type="password" name="pass" /></p>
+    <p><input type="submit" value="OK" /></p>
+</form>
+<iframe id="result" src="http://google.com" width="0" height="0"></iframe>
+
+<style type="text/css">
+.display {display:none;}
+</style>
+<script>
+/*表单验证函数*/
+function validate(form) {
+    alert(form.name);
+    if(form.className.indexOf('display') == -1) {
+        form.className = "display";
+    } else {
+        form.className = ""
+    }
+}
+/*动态创建元素*/
+var dynamic = window.document.createElement('form');
+dynamic.setAttribute('name', 'dynamic');
+dynamic.setAttribute('target', 'result');
+dynamic.setAttribute('onsubmit', 'return validate(this)');
+dynamic.innerHTML = '<p> email: <input type="email" name="email" /></p>';
+dynamic.innerHTML += '<p> password: <input type="password" name="pwd" /></p>';
+dynamic.innerHTML += '<p> <input type="submit" value="OK" /></p>';
+var body = document.getElementsByTagName('body')[0];
+body.appendChild(dynamic);
+
+/*访问动态元素*/
+console.log(document.querySelectorAll('form[name="dynamic"] input'));
+
+
+</script>

@@ -1,0 +1,72 @@
+//二部图最大权匹配，高人所写，听说去斯坦福了，权当收藏咯：   
+    
+  #include   <stdio.h>   
+  #include   <string.h>   
+  #define   MAXN   100   
+  #define   _clr(x)   memset(x,0xff,sizeof(x))   
+    
+  int   match(int   g[][MAXN],int   n,int   m,int   *match1,int   *match2)   
+  {   
+  int   l1[MAXN],l2[MAXN],i,j,k,ret=0;   
+  int   s[MAXN],t[MAXN],p,q,al;   
+  bool   gl[MAXN][MAXN];   
+  for(i=0;i<n;i++){   
+  for(k=0,j=1;j<m;j++)   if   (g[i][j]>g[i][k])   k=j;   
+  l1[i]=g[i][k];   
+  }   
+  memset(l2,0,sizeof(l2));   
+  for(i=0;i<n;i++)   
+  for(j=0;j<m;j++)   
+  if   (g[i][j]==l1[i])   gl[i][j]=1;   
+  else   gl[i][j]=0;   
+  for(_clr(match1),_clr(match2),i=0;i<n;i++){   
+  for(_clr(t),s[p=q=0]=i;p<=q&&match1[i]<0;p++)   
+  for(k=s[p],j=0;j<m&&match1[i]<0;j++)   
+  if   (gl[k][j]&&t[j]<0){   
+  s[++q]=match2[j],t[j]=k;   
+  if   (s[q]<0)   
+  for(p=j;p>=0;j=p)   
+  match2[j]=k=t[j],p=match1[k],match1[k]=j;   
+  }   
+  if   (match1[i]<0){   
+  al=100000000;   
+  for(j=0;j<p;j++)   
+  for(k=0;k<m;k++)   
+  if   (t[k]<0&&l1[s[j]]+l2[k]-g[s[j]][k]<al)   al=l1[s[j]]+l2[k]-g[s[j]][k];   
+  for(j=0;j<p;j++)   l1[s[j]]-=al;   
+  for(j=0;j<m;j++)   if   (t[j]>=0)   l2[j]+=al;   
+  for(j=0;j<n;j++)   
+  for(k=0;k<m;k++)   
+  if   (g[j][k]==l1[j]+l2[k])   gl[j][k]=1;   
+  else   gl[j][k]=0;   
+  i--;   
+  continue;   
+  }   
+  }   
+  for(i=0;i<n;i++)   ret+=g[i][match1[i]];   
+  return   ret;   
+  }   
+    
+  int   temp(int   g[][MAXN],int   n,int   m,int   *match1,int   *match2)   
+  {   
+  int   s[MAXN],t[MAXN],p,q,i,j,k,ret=0;   
+  for(_clr(match1),_clr(match2),i=0;i<n;ret+=(match1[i]>=0),i++)   
+  for(_clr(t),s[p=q=0]=i;p<=q&&match1[i]<0;p++)   
+  for(k=s[p],j=0;j<m&&match1[i]<0;j++)   
+  if   (g[k][j]&&t[j]<0){   
+  s[++q]=match2[j],t[j]=k;   
+  if   (s[q]<0)   
+  for(p=j;p>=0;j=p)   
+  match2[j]=k=t[j],p=match1[k],match1[k]=j;   
+  }   
+  return   ret;   
+  }   
+    
+  int   main()   
+  {   
+  int   g[MAXN][MAXN],match1[MAXN],match2[MAXN];   
+  g[0][0]=1,g[1][1]=1;   
+  g[0][1]=2,g[1][0]=2;   
+  printf("%d\n",match(g,2,2,match1,match2));   
+  return   0;   
+  }

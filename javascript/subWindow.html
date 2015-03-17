@@ -1,0 +1,22 @@
+<html>
+  <head>
+<title>subWindow</title>
+</head>
+<body>
+<h1>subWindow</h1>
+<script type="text/javascript">
+  function confirmClose() {
+      if (self.confirm("Are you sure you want to close me?")) {
+          self.close();
+      }
+  }
+</script>
+
+<input type="button" id="close_button" value="Close me"
+       onclick="confirmClose()">
+
+<address>
+<a href="mailto:jiqingwu@gmail.com">Jiqing Wu</a>
+</address>
+</body>
+</html>

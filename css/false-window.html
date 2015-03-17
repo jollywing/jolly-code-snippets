@@ -1,0 +1,63 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+	<title>LIGHTBOX EXAMPLE</title>
+	<style>
+	  .black_overlay{
+	  display: none;
+	  position: absolute;
+	  top: 0%;
+	  left: 0%;
+	  width: 100%;
+	  height: 100%;
+	  background-color: black;
+	  z-index:1001;
+	  -moz-opacity: 0.8;
+	  opacity:.80;
+	  filter: alpha(opacity=80);
+	  }
+	  .white_content {
+	  display: none;
+	  position: absolute;
+	  top: 25%;
+	  left: 30%;
+	  width: 40%;
+	  height: auto;
+	  padding: 16px;
+	  border: 5px solid darkgreen;
+	  background-color: white;
+	  z-index:1002;
+	  overflow: auto;
+	  }
+	</style>
+    <script language="javascript">
+      function cancelOperation()
+      {
+        var win = document.getElementById('light');
+        win.style.display = 'none';
+        var shade = document.getElementById('fade');
+        shade.style.display = 'none';
+      }
+
+      function addClicked()
+      {
+        var win = document.getElementById('light');
+        win.style.display = 'block';
+        var shade = document.getElementById('fade');
+        shade.style.display = 'block';
+      }
+    </script>
+  </head>
+  <body>
+	<p>This is the main content. To display a lightbox click <a href = "javascript:void(0)" onclick = "addClicked()">here</a></p>
+	<div id="light" class="white_content">
+      <table align="center">
+        <tr><td>新记录名称</td><td><input type="text" name="new_item_name"/></td></tr>
+        <tr><td align="right"><input type="button" value="添加" onclick="alert('没有连接服务器!')"/></td>
+          <td align="left"><input type="button" value="取消" onclick = "cancelOperation()" /></td>
+        </tr>
+      </table>
+    </div>
+	<div id="fade" class="black_overlay"></div>
+  </body>
+</html>

@@ -1,0 +1,59 @@
+
+<html>
+  <head>
+    <title>TIME OUT</title>
+    <style type="text/css">
+    .fade_background{
+	  display: none;
+	  position: fixed;
+	  top: 0%;
+	  left: 0%;
+	  width: 100%;
+	  height: 100%;
+	  background-color: black;
+	  z-index:1001;
+	  -moz-opacity: 0.8;
+	  opacity:.80;
+	  filter: alpha(opacity=80);
+    }
+    .false_win {
+	  display: none;
+	  position:fixed;
+	  top: 10%;
+	  left: 30%;
+	  width: auto;
+	  height: auto;
+	  padding: 16px;
+	  border: 5px solid darkgreen;
+	  background-color: white;
+	  z-index:1002;
+	  overflow: auto;
+    }
+    </style>
+    <script language='javascript'>
+    function closeFalseWin(winId, shadeId)
+    {
+      var win = document.getElementById(winId);
+      win.style.display = 'none';
+      var shade = document.getElementById(shadeId);
+      shade.style.display = 'none';
+    }
+
+    function messageBox(winId, shadeId, message)
+    {
+      var win = document.getElementById(winId);
+      win.innerHTML = message;
+      win.style.display = 'block';
+      var shade = document.getElementById(shadeId);
+      shade.style.display = 'block';
+      setTimeout("closeFalseWin('" + winId +"', '" + shadeId + "')", 1500);
+    }
+    </script>
+  </head>
+  <body>
+    <div id='win' class='false_win'></div>
+    <div id="fade" class="fade_background"></div>
+    <input type='button' onclick='messageBox("win", "fade", "Hello, world!")' value='消息框'/>
+  </body>
+  </body>
+</html>

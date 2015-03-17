@@ -1,0 +1,70 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />  
+    <title>Popup Menu</title>
+
+    <style type="text/css">
+    #nav_button {
+      background-color:#99eef0;
+      border: thin solid #55ff00;
+      padding: 0px 5px;
+      // display: block;
+    }
+    #dreams {
+      position: absolute;
+      background-color: #99ff99;
+      visibility: hidden;
+      margin: 0px;
+      padding: 0px;
+      border: 1px solid #005522;
+    }
+    #dreams a {
+      display: block;
+    }
+    #dreams a:hover{
+      background-clor: #9999ff;
+      color: #004400;
+    }
+    </style>
+
+    <script language='javascript'>
+    var hideTimer = null;
+
+    function dropList(id){
+      cancelHidingTimer();
+      var list = document.getElementById(id);
+      list.style.visibility = 'visible';
+    }
+
+    function hideList(id){
+      var list = document.getElementById(id);
+      list.style.visibility = 'hidden';
+    }
+
+    function beginHiding(id){
+      hideTimer = setTimeout("hideList('" + id +"')", 600);
+    }
+
+    function cancelHidingTimer(){
+      if(hideTimer){
+        clearTimeout(hideTimer);
+        hideTimer = null;
+      }
+    }
+    </script>
+  </head>
+  <body>
+    <h1>Popup Menu</h1>
+
+    <p>
+      <span id='nav_button' onclick="dropList('dreams')" onmouseout="beginHiding('dreams')">all my dreams</span>
+      <div id='dreams' onmouseover="cancelHidingTimer()" onmouseout="beginHiding('dreams')">
+        <a href='#' onclick="beginHiding('dreams')">Be a free man</a>
+        <a href='#' onclick="beginHiding('dreams')">Be rich man</a>
+        <a href='#' onclick="beginHiding('dreams')">Have a good wife</a>
+      </div>
+    </p>
+    <p>Would you like this?</p>
+  </body>
+</html>

@@ -1,0 +1,49 @@
+<html>
+  <head>
+    <style>
+    body {margin: 2% 0% 2% 0%;text-align:center;padding:0px;}
+    h1 {text-align:center;}
+    /*.center {margin-left:auto; margin-right:auto;}*/
+    .nav {background-color:gray}
+    ul {list-style-type:none; padding:0px 50px; text-align:center; background-color:gray}
+    /* make horizontal bars */
+    li {display:inline; /*background-color:lightblue;*/
+    font-size:larger; font-weight:bold; margin: 2px 15px;}
+    li.left {float:left; /*text-align:center; width:80px;*/}
+    li.right {float:right;}
+    /* li a {display:block; width:80px} */
+    p.box {clear:both; margin: 0px 15px; padding: 20px 10px;}
+    .clear {clear:both;}
+    </style>
+
+<title>Herizontal List</title>
+</head>
+<body>
+<h1>Herizontal List</h1>
+
+<div class="nav">
+<ul>
+  <li class="left"><a href="http://www.debian.org" target="frame1">Debian</a></li>
+  <li class="left"><a href="http://www.archlinux.org">Arch</a></li>
+  <li class="left"><a href="http://www.ubuntu.org">Ubuntu</a></li>
+  <li class="left"><a href="http://www.freebsd.org">FreeBSD</a></li>
+  <li class="left"><a href="http://www.redhat-fedora.org">Fedora</a></li>
+  <li class="right">FORUM</li>
+  <li class="right">ABOUT US</li>
+</ul>
+<!-- The background color of out level can not show, because of the inner float elements. -->
+<!-- To solve this problem, Add "clear:both" between inner elements and outer level. -->
+<div class="clear"></div>
+</div>
+
+<!-- <p class="box">Hello, welcome you to Linux/Unix world! </p> -->
+
+<iframe src="table-style.html"
+        name="frame1"
+        frameborder="0" width="90%" height="100%"></iframe>
+
+<address>
+<a href="mailto:jiqingwu@gmail.com">Jiqing Wu</a>
+</address>
+</body>
+</html>

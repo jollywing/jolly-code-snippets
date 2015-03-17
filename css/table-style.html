@@ -1,0 +1,35 @@
+<html>
+  <head>
+<title>Table CSS</title>
+<style>
+body {margin: 1% 5%; color:navy;}
+
+table {border: 1px solid blue; border-collapse:collapse}
+th {background-color:lightblue; border: 1px solid blue;}
+td {border-left: 1px solid blue; border-right: 1px solid blue;
+/*text-align:center;*/ padding: 5px 2px;}
+tr.alt {background-color:lightgray;}
+
+/* When mouse hover on a line of table, make that line highlighted. */
+/* probably this does not work on IE6, where javascript support is needed.*/ 
+tr:hover {background-color:lightgreen;}
+
+address {position:fixed; bottom: 10px;}
+</style>
+</head>
+<body>
+<h1>Table CSS</h1>
+
+<table>
+  <tr><th>Name</th><th>Description</th></tr>
+  <tr><td>Debian</td><td>A stable and famous Linux distribution.</td></tr>
+  <tr class="alt"><td>Redhat</td><td>A Linux distribution with long history.</td></tr>
+  <tr><td>Ubuntu</td><td>A Easy used Linux distribution, based on Debian.</td></tr>
+  <tr class="alt"><td>ArchLinux</td><td>A Light and fast Linux distribution.</td></tr>
+  <tr><td>puppy</td><td>A little Linux system, can be stored on a udisk.</td></tr>
+</table>
+<address>
+<a href="mailto:jiqingwu@gmail.com">Jiqing Wu</a>
+</address>
+</body>
+</html>

@@ -1,0 +1,170 @@
+计算二分图的算法有网络流算法和匈牙利算法（目前就知道这两种），其中匈牙利算法是比较巧妙的，具体过程如下（转自组合数学）：
+
+令g=（x,*,y）是一个二分图，其中x={x1,x2...},y={y1,y2,....}.令m为g中的任意匹配。 
+
+1。将x的所有不与m的边关联的顶点表上￥，并称所有的顶点为未扫描的。转到2。 
+
+2。如果在上一步没有新的标记加到x的顶点上，则停，否则 ，转3 
+
+3。当存在x被标记但未被扫描的顶点时，选择一个被标记但未被扫描的x的顶点，比如xi，用（xi）标 
+
+记y 的所有顶点，这些顶点被不属于m且尚未标记的边连到xi。 
+
+ 现在顶点xi 是被扫描的。如果不存在被标记但未被扫描的顶点，转4。 
+
+4。如果在步骤3没有新的标记被标记到y的顶点上，则停，否则转5。 
+
+5。当存在y被标记但未被扫描的顶点时。选择y的一个被标记但未被扫描的顶点，比如yj， 
+
+用（yj）标记x的顶点，这些顶点被属于m且尚未标记的边连到yj。现在，顶点yj是被扫描的。 
+
+如果不存在被标记但未被扫描的顶点则转道2。 
+
+由于每一个顶点最多被标记一次且由于每一个顶点最多被扫描一次，本匹配算法在有限步内终止。 
+
+代码实现：
+
+bfs过程：
+
+#include<stdio.h>
+#include<string.h>
+main()
+{
+ //变量声明
+ bool map[100][300];
+ int i,i1,i2,num,num1,que[300],cou,stu,match1[100],match2[300],pque,p1,now,prev[300],n;
+
+ scanf("%d",&n);
+ for(i=0;i<n;i++)
+ {
+  //初始化
+  scanf("%d%d",&cou,&stu);
+  memset(map,0,sizeof(map));
+  for(i1=0;i1<cou;i1++)
+  {
+   scanf("%d",&num);
+   for(i2=0;i2<num;i2++)
+   {
+    scanf("%d",&num1);
+    map[i1][num1-1]=true;
+   }
+  }
+  num=0;
+  memset(match1,int(-1),sizeof(match1));
+  memset(match2,int(-1),sizeof(match2));
+
+  for(i1=0;i1<cou;i1++)
+  {
+   p1=0;
+   pque=0;
+
+   //初始化prev和que
+   //有多少map为真，pque就有多大，que也有多长。
+   for(i2=0;i2<stu;i2++)
+   {
+    if(map[i1][i2])
+    {
+     prev[i2]=-1;
+     que[pque++]=i2;
+    }
+    else
+     prev[i2]=-2;
+   }
+
+   // ...
+   while(p1<pque)
+   {
+    now=que[p1];
+    if(match2[now]==-1)
+     break;
+    p1++;
+    for(i2=0;i2<stu;i2++)
+    {
+     if(prev[i2]==-2&&map[match2[now]][i2])
+    {
+      prev[i2]=now;
+      que[pque++]=i2;
+     }
+    }
+   }
+
+   if(p1==pque)
+    continue;
+
+   // ...
+   while(prev[now]>=0)
+   {
+    match1[match2[prev[now]]]=now;
+    match2[now]=match2[prev[now]];
+    now=prev[now];
+   }
+   match2[now]=i1;
+   match1[i1]=now;
+   num++;
+  }
+
+  // 输出结果
+  if(num==cou)
+   printf("YES\n");
+  else
+   printf("NO\n");
+ }
+}
+
+dfs实现过程：
+
+#include<stdio.h>
+#include<string.h>
+#define MAX 100
+
+bool map[MAX][MAX],searched[MAX];
+int prev[MAX],m,n;
+
+bool dfs(int data)
+{
+ int i,temp;
+ for(i=0;i<m;i++)
+ {
+  if(map[data][i]&&!searched[i])
+  {
+   searched[i]=true;
+   temp=prev[i];
+   prev[i]=data;
+   if(temp==-1||dfs(temp))
+    return true;
+   prev[i]=temp;
+  }
+ }
+ return false;
+}
+
+main()
+{
+ int num,i,k,temp1,temp2,job;
+ while(scanf("%d",&n)!=EOF&&n!=0)
+ {
+  scanf("%d%d",&m,&k);
+  memset(map,0,sizeof(map));
+  memset(prev,int(-1),sizeof(prev));
+  memset(searched,0,sizeof(searched));
+  for(i=0;i<k;i++)
+  {
+   scanf("%d%d%d",&job,&temp1,&temp2);
+   if(temp1!=0&&temp2!=0)
+    map[temp1][temp2]=true;
+  }
+  num=0;
+  for(i=0;i<n;i++)
+  {
+   memset(searched,0,sizeof(searched));
+   dfs(i);
+  }
+  for(i=0;i<m;i++)
+  {
+   if(prev[i]!=-1)
+    num++;
+  }
+  printf("%d\n",num);
+ }
+}
+
