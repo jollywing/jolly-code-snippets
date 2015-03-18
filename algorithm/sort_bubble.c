@@ -21,7 +21,7 @@ int main(int argc, char *argv[])
     printf("%d ", a[i]);
   }
   printf("\n");
-  
+
   return 0;
 }
 
@@ -38,4 +38,23 @@ void bubble_sort(int *a, int size)
       }
     } // end for j
   }// end for i
+}
+
+void bubble_sort_enhanced(int *a, int size)
+{
+    int i, j, t;
+    unsigned char swapped;
+    for(i = 1; i < size; ++i) {
+        swapped = 0;
+        for(j = 0; j < size - i; ++j) {
+            if(a[j] > a[j+1]){
+                t = a[j];
+                a[j] = a[j+1];
+                a[j+1] = t;
+                swapped = 1;
+            }
+        }
+        if(!swapped)
+            break;
+    }
 }

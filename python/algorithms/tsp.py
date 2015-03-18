@@ -1,2 +1,0 @@
-
-# Traveling Salesman Problem
