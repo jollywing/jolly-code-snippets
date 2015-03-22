@@ -19,6 +19,21 @@ void reverse_string(char *s) {
     }
 }
 
+/* 一般要求不能使用strlen  */
+void reserve(char* str)
+{
+    assert(str != NULL);
+    char * p1 = str;
+    char * p2 = str-1;
+    while(*++p2);
+    p2 -= 1;
+    while(p1<p2)  {
+        char c = *p1;
+        *p1++ = *p2;
+        *p2-- = c;
+    }
+}
+
 void reverse_output(const char *s) {
     int len = strlen(s);
     int i;
