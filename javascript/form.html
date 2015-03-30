@@ -1,0 +1,97 @@
+
+<html>
+  <head>
+    <script language='javascript'>
+    var formcShowed = false;
+
+    function getObj(tagName, objName){
+      var objs = document.getElementsByTagName(tagName);
+      for(var obj in objs){
+        if(obj.name == objName){
+          return obj;
+        }
+      }
+      return null;
+    }
+
+    function validate(form){
+      alert(form.name);
+      if(form === document.forms[0]){
+        nickvalue = form.elements['nick'].value;
+        if(nickvalue == null || nickvalue == ""){
+          alert('nick can not be empty!');
+          form.nick.focus();
+          return false;
+        }
+        return true;
+      }
+      else if(form === document.forms['form_b']){
+        agevalue = form.age.value;
+        if(agevalue == null || agevalue == ""){
+          alert('age can not be empty!');
+          form.age.focus();
+          return false;
+        }
+        return true;
+      }
+      else if(form === document.getObj('form', 'form_c')){
+        alert('form C');
+        sexvalue = form.sex.value;
+        if(sexvalue == null || sexvalue == ""){
+          alert('sex can not be empty!');
+          form.sex.focus();
+          return false;
+        }
+        return true;
+      }
+    }
+
+    function showFormC(){
+      field = document.getElementById('hideForm');
+      button = document.getElementById('toggle');
+      if(formcShowed == false){
+        var form = field.appendChild(document.createElement('form'));
+        form.name= 'form_c';
+        form.id = 'form_c';
+        form.method= 'post';
+        form.setAttribute('onsubmit', "return validate(this)");
+        var input_sex = form.appendChild(document.createElement('input'));
+        input_sex.type = 'text';
+        input_sex.name = 'sex';
+        
+        var submit = form.appendChild(document.createElement('input'));
+        submit.type = 'submit';
+        submit.value = '提交';
+        /* field.innerHTML = "<form onsubmit='return validate(this)' name='form_c' method='post'>";
+        field.innerHTML += "<input type='text' name='sex' />";
+        field.innerHTML += "<input type='submit'/>";
+        field.innerHTML += "</form>"; */
+        formcShowed = true;
+        button.value = 'Hide form c';
+      }
+      else {
+        var form_c = document.getElementById('form_c');
+        field.removeChild(form_c);
+        // field.innerHTML = "";
+        formcShowed = false;
+        button.value = 'Show form c';
+      }
+    }
+    </script>
+  </head>
+  <body>
+    <form onsubmit='return validate(this)' name='form_a' method='post'>
+      <input type='text' name='nick' />
+      <input type='submit'/>
+    </form>
+    <form onsubmit='return validate(this)' name='form_b' method='post'>
+      <input type='text' name='age' />
+      <input type='submit'/>
+    </form>
+    <input type='button' id='toggle' onclick='showFormC()' value='Show form c'/>
+    <p>
+    <div class='hide' id='hideForm'></div>
+    </p>
+    <hr/>
+  </body>
+</html>

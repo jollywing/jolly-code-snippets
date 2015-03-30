@@ -23,8 +23,11 @@ int main(int argc, char *argv[])
 
 void test_aio_write_file()
 {
+    /* aio control block */
     struct aiocb my_aiocb;
+    /* bzero(char *buf, size_t size); need <strings.h> */
     bzero((char *)&my_aiocb, sizeof(struct aiocb));
+    /* 为AIO分配空间 */
     my_aiocb.aio_buf = malloc(BUFSIZE + 1);
     if(!my_aiocb.aio_buf){
         perror("malloc aio buffer failed!\n");
@@ -35,16 +38,20 @@ void test_aio_write_file()
     strcpy((char *)my_aiocb.aio_buf, src_str);
     my_aiocb.aio_nbytes = strlen(src_str) + 1;
     my_aiocb.aio_offset = 0;
-    
+
     int fd;
+    /* 打开文件，如果成功，返回一个不小于0的描述符 */
     fd = open("demo.txt", O_APPEND);
     if(fd < 0){
         perror("Open file failed!\n");
         return;
     }
+    /* 为AIO设置文件描述符 */
     my_aiocb.aio_fildes = fd;
-    
+
     int ret;
+    /* 缓冲区和对应的文件描述符都已经设置好，可以写入 */
+    /* 如果排队成功，立即返回0，如果失败返回 -1 */
     ret = aio_write(&my_aiocb);
     if(ret < 0){
         perror("Enqueue AIO write request failed!\n");
@@ -52,6 +59,7 @@ void test_aio_write_file()
         return;
     }
 
+    /* 查询AIO的状态 */
     while(aio_error(&my_aiocb) == EINPROGRESS);
 
     if((ret = aio_return(&my_aiocb)) <= 0){
@@ -89,7 +97,7 @@ void test_aio_read_file()
 
     /* fildes = file descriptor */
     my_aiocb.aio_fildes = fd;
-    my_aiocb.aio_offset = 0;
+    my_aiocb.aio_offset = 0;    /* 从头开始读 */
     my_aiocb.aio_nbytes = BUFSIZE;
 
     int ret;

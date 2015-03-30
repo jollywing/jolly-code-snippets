@@ -1,0 +1,77 @@
+━━━━━━━
+温度计设计：
+━━━━━━━
+
+┅┅┅┅┅┅┅┅
+温度计的图形显示
+┅┅┅┅┅┅┅┅
+class TempIndicator extends JComponent {
+  // arcw和arch表示圆弧的高度和宽度
+  // 温度计外形
+  RoundRectangle2D rect = new RoundRectangle2D.Float( float x, float y, float w, float h, float arcw, float arch)
+  g2.draw(rect);
+  
+  // 温度条
+  RoundRectangle2D rectT = new RoundRectangle2D.Float( float x, float yT, float w, float h-yT, float arcw, float arch);
+  g2.setColor(Color.red);
+  g2.fill(rectT);
+}
+
+┅┅┅┅┅┅┅┅
+窗体布局
+┅┅┅┅┅┅┅┅
+JFrame默认的布局管理器是BorderLayout，组件安放在北、南、东、西和中心。
+┏━━━━━┳━━━ ━┓
+┃摄氏温度  ┃         ┃
+┃ xx.0     ┃indicator┃  
+┃          ┃温度计   ┃
+┃华氏温度  ┃         ┃
+┃ xx.0     ┃         ┃
+┗━━━━━┻━━━ ━┛
+public calss TempConversion extends JPanel {
+  private JPanel pLeft;
+  private TempIndicator ti;
+  private JLabel l1, l2;
+  private JTextField t1, t2;
+
+  public void init() {
+    setLayout( new BorderLayout() );
+
+    //标签和文本框
+	// JLabel( string s, horizenAlignment);
+	l1 = new JLabel("摄氏温度：", JLabel.LEFT);
+	l2 = new JLabel("华氏温度：", JLabel.LEFT);
+	// JTextField( string s, int cols);
+	t1 = new JTextField("0.0", 15);
+	t2 = new JTextField("32.0", 15);
+
+    //左侧的面板
+    pLeft = new JPanel();
+	pLeft.setLayout( new BoxLayout(pLeft, BoxLayout.Y_AXIS) );
+	pLeft.add(l1);
+	pLeft.add(t1);
+	pLeft.add(l2);
+	pLeft.add(t2);
+    add( pLeft, BorderLayout.WEST );	
+
+    ti = new TempIndicator();
+    add( ti, BorderLayout.EAST );
+  }
+}
+
+┅┅┅┅┅┅┅┅
+窗口设计
+┅┅┅┅┅┅┅┅
+//在main方法中
+JFrame fr = new JFrame("Temperature Convertor");
+fr.setSize(256,256);
+
+WindowHandler l = new WindowHandler();
+fr.addWindowListener(l);
+
+//加入应用
+TempConversion tc = new TempConversion();
+tc.init();
+fr.getContentPane().add(tc, BorderLayout.CENTER);
+
+fr.setVisible(true);

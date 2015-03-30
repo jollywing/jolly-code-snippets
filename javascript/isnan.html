@@ -1,0 +1,25 @@
+<html>
+  <head>
+    <title>is Nan</title>
+    <script language='javascript'>
+    function report(){
+      warnNaN('12');
+      warnNaN(11);
+      warnNaN('');
+      warnNaN('hkj');
+      warnNaN(null);
+    }
+
+    function warnNaN(param){
+      var1 = parseInt(param);
+      if(isNaN(var1)){
+        window.alert('[' + param + '] is NaN.');
+      }
+    }
+    </script>
+  </head>
+  <body onload='report()'>
+    <h1>is Nan</h1>
+
+  </body>
+</html>

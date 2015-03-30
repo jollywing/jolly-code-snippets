@@ -1,0 +1,16 @@
+<html>
+  <head>
+    <script language='javascript'>
+    function outputEncodedUrl(){
+      var shit='成功日记';
+      var field = document.getElementById('shit');
+      field.innerHTML = encodeURI(shit);
+      //decodeURI(str);
+    }
+    </script>
+  </head>
+  <body onload='outputEncodedUrl()'>
+    <div id='shit'></div>
+    <!-- %E6%88%90%E5%8A%9F%E6%97%A5%E8%AE%B0 -->
+  </body>
+</html>

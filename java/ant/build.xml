@@ -1,0 +1,90 @@
+<project name="AntTest" default="compile" basedir=".">
+  <description>
+    This project is used to practice apache ant.
+    2013-07-17.
+  </description>
+  <property name="binDir" value="${basedir}/bin" />
+  <!--
+      if ant.project.description is not null,
+      target 'test' will be executed
+  -->
+  <target name="test" if="ant.project.description">
+    <echo message="${ant.project.description}"/>
+  </target>
+
+  <!-- target 'test' will be executed unless player is null.
+      <target name="test" unless="player">
+      </target>
+  -->
+  <!-- variables besides System.getProperties()
+       ant.file: the absolute path of build.xml
+       ant.version: the version of apache ant
+       ant.project.name: the name of this project
+       ant.java.version: the version of the given JDK.
+  -->
+
+
+  <!-- FILE COMMANDS
+       Copy a file to another file
+       <copy file="" tofile="" />
+       Copy a file to a directory
+       <copy file="" todir="" />
+       Copy a dir to another dir
+       <copy todir=""><fileset dir="" /></copy>
+
+       Move a file to another file
+       <move file="" tofile="" />
+       Move a file to a directory
+       <move file="" todir="" />
+       Move a directory to a directory
+       <move todir=""><fileset dir=""/></move>
+
+       Delete a file
+       <delete file=""/>
+       Delete a directory
+       <delete dir=""/>
+       Delete all empty dirs and backup files
+       <delete inluceEmptyDirs="true">
+         <fileset dir="." includes="**/*.bak" />
+       </delete>
+
+       Create directory
+       <mkdir dir=""/>
+  -->
+  <target name="init">
+    <!--
+        This is ilegal!!
+        <mkdir dir="${basedir}/bin, ${basedir}/src"/>
+    -->
+    <mkdir dir="${binDir}"/>
+    <mkdir dir="${basedir}/src"/>
+    <echo message="JDK Version = ${ant.java.version}" />
+    <!--
+        <echo message="" file="" append="true" />
+    -->
+  </target>
+  <target name="clean">
+    <delete dir="${binDir}" />
+  </target>
+  <target name="compile" depends="init">
+    <javac srcdir="${basedir}/src" destdir="${basedir}/bin"
+           includeantruntime="false" encoding="UTF-8"/>
+  </target>
+  <target name="run" depends="compile">
+    <java classname="HelloWorld">
+      <classpath><pathelement path="bin"/></classpath>
+    </java>
+  </target>
+  <target name="package" depends="run">
+    <jar destfile="hello.jar" basedir="${binDir}">
+      <manifest><attribute name="Main-class" value="HelloWorld"/></manifest>
+    </jar>
+    <!--
+        <war destfile="" webxml="/path/to/WEB-INF/web.xml">
+          <fileset dir="" includes="**/*.jsp"/>
+          <lib dir=""/>
+          <classes dir=""/>
+        </war>
+    -->
+  </target>
+</project>

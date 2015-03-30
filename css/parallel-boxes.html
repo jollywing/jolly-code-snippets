@@ -1,0 +1,56 @@
+<html>
+  <head>
+<title>Parallel Boxes</title>
+<style>
+/* round corner is new feature brought by CSS3.
+-moz-border-radius is supported by FireFox,
+-webkit-border-radius is supported by safari and chrome.*/
+
+/* You can also make each corner round or not, like following:
+  -moz-border-radius-topleft: 15px;
+  -moz-border-radius-topright: 0px;
+  -moz-border-radius-bottomright: 15px;
+  -moz-border-radius-bottomleft: 0px;
+  -webkit-border-top-left-radius: 15px;
+  -webkit-border-top-right-radius: 0px;
+  -webkit-border-bottom-left-radius: 0px;
+  -webkit-border-bottom-right-radius: 15px;
+*/
+.box {border: 5px groove yellow; float:left; /*margin:10px;*/ padding:5px;
+-moz-border-radius: 15px; -webkit-border-radius: 15px;
+margin-bottom:0px; margin-top:auto; margin-left: 10px; margin-right:5px;
+/*position:relative;*/ bottom:0px;}
+#boxes {vertical-align:bottom;}
+address {clear:both;}
+</style>
+</head>
+<body>
+<h1>Parallel Boxes</h1>
+<span id="boxes">
+<div class="box">
+  <li>Make Image Links</li>
+  <li>Make URL links</li>
+  <li>Custom HTML Link</li>
+  <li>Extract URL</li>
+</div>
+<div class="box">
+  <li>make-html-table</li>
+  <li>adding HTML Markup</li>
+  <li>HTML Syntax Coloring Source Code</li>
+  <li>Elisp Power! Transform Text Under Cursor</li>
+  <li>Chinese character Reference Linkify</li>
+  <li>HTML make-citation</li>
+  <li>Convert Image Files in Dired</li>
+</div>
+<div class="box">
+  <li>Updating Web Feed</li>
+  <li>Updating Page Tags</li>
+  <li>Generate Google Map Link</li>
+</div>
+</span>
+<!-- <div class="clear"></div> -->
+<address>
+<a href="mailto:jiqingwu@gmail.com">Jiqing Wu</a>
+</address>
+</body>
+</html>

@@ -1,0 +1,279 @@
+<html>
+  <head>
+<title>My First JavaScript</title>
+<style type="text/css">
+.highlight {color: red; font-weight: bold}
+.code {color: blue}
+</style>
+<script type="text/javascript">
+function showBrowserType() {
+    document.getElementById("readout").innerHTML =
+    "Your browser says it is: " +
+    "<span class='highlight'>" + navigator.userAgent +
+    "</span>.<hr/>";
+    // window.alert("all contents has been loaded.");
+}
+
+// replace this statement with body onload event property.
+// window.onload = showBrowserType;
+
+function showDocProps() {
+    document.getElementById("doc_props").innerHTML = 
+        "document.forms.length: " + document.forms.length
+}
+</script>
+</head>
+
+<body onload="showBrowserType()">
+<h1>My First JavaScript: show browser type</h1>
+<div id="readout"></div>
+
+<script type="text/javascript">
+function hello() {
+    var answerName = window.prompt("What's your name?", "");
+    if (answerName) {
+        window.alert("Hello, " + answerName);
+    }
+}
+</script>
+<input id="hello_button" value="Hello" type="button" onclick="hello()">
+<input id="go_button" value="Go" type="button"
+       onclick="self.location.href='subWindow.html'">
+
+<script type="text/javascript">
+function upperCase(field) {
+    // var text = document.forms["testForm"].elements["nameText"];
+    var upperCasedStr = field.value.toUpperCase();
+    field.value = upperCasedStr;
+}
+
+function checkContent(form) {
+    var yourJob;
+    for (var i = 0; i < form.jobs.length; i ++) {
+        if (form.jobs[i].checked) {
+            yourJob = form.jobs[i].value;
+            break;
+        }
+    }
+
+    var checked = form.elements["armyCheck"].checked;
+    var name = form.nameText.value;
+    if (checked) {
+        alert(name + " is in army.\nHis job is " + yourJob);
+    } else {
+        alert(name + " is not in army.\nHis job is " + yourJob);
+    }
+}
+
+function goThere() {
+    var list = document.testForm.urlList;
+    alert(list.options[list.selectedIndex].value);
+    location.href = list.options[list.selectedIndex].value;
+}
+</script>
+
+<form id="form1" name="testForm">
+  Name:&nbsp;
+  <input type="text" name="nameText" value="" onchange="upperCase(this)">
+  <br>
+  <input type="checkbox" name="armyCheck">in army<br>
+  Job:&nbsp;
+  <input type="radio" name="jobs" value="Magician" checked>Magician
+  <input type="radio" name="jobs" value="Fighter" >Fighter
+  <input type="radio" name="jobs" value="Priest" >Priest
+  <br>
+  Choose where to go:
+  <select name="urlList" onchange="goThere()">
+    <option selected value="file:///home/wuchen/blog/index.html">Home page
+    <option value="/home/wuchen/blog/life/diary/2012diary.html">Diary
+    <option value="/home/wuchen/blog/art/book/2012books.html">Book
+    <!-- The "~/blog/..." doesn't work -->
+  </select>
+  <br>
+  <input type="submit" value="submit" onclick="checkContent(this.form)">
+</form>
+
+<h2>summary</h2>
+<ol>
+  <li>get browser type use <code>navigator.userAgent</code></li>
+  <li>set content
+  with <code>document.getElementById("xxx").innerHTML = </code>
+  </li>
+  <li><code> window.onload</code> event, this can be replaced
+  with &lt;body onload="func()"&gt;</li>
+  <li>the semicolons after each statement is not neccessary.</li>
+  <li>input_text.focus()</li>
+  <li>window.moveTo(x, y)</li>
+  <li>invoke javascript function need '()'</li>
+  <li>window.alert('some msg'). Javascript doesn't distinguish '' and "".</li>
+  <li>window.confirm("some msg"), popup dialog with two buttons:
+  OK and Cancel. return boolean value (true or false).</li>
+  <li>window.prompt("hint message", "defaultValue"); If
+  the <em>Cancel Button</em> is pushed, return null; If
+  the <em>OK Button</em> is pushed return a string.</li>
+  <li><code>
+  &lt;script type="text/javascript" src="myscript.js"&gt;&lt;/script&gt;
+  </code></li>
+  <li><code>document.write("some html contents.");</code> Notice:
+  after a page loads, the browser's output stream automatically
+  closes. After that, any document.write method will open a new
+  stream and erase the current page (include any variables and
+  values). After your writing finishes, you should invoke
+  document.close() to close the output stream, otherwise your
+  images or forms may not appear on your page.</li>
+  <li>&lt;input type="button" onclick="func()" ...&gt;</li>
+  <li>create variable: var myAge; var hisAge = 45;</li>
+  <li>Data Type conversions: 3 + "3" (the result will be "33"); 3
+  + 3 + "3" (the result will be "63", because the expression is
+  evaluated from left to right.</li>
+  <li>Convert string to number: parseInt("42.3"), the result will
+  be 42; parseFloat("42.3"), the result will be 42.3.</li>
+  <li>Arithmetic operators: +, -, *, /</li>
+  <li>comparision operators: ==, !=, &gt;, &gt;=, &lt; &lt;=</li>
+  <li>Array: var USStates = new Array(51); It is indexed from 0.
+  USStates.length return its count of elements.</li>
+  <li>If constructions: <pre>
+  if (condition) {
+      statements if true
+  }
+  </pre></li>
+  <li>If else constructions:<pre>
+  if (condition) {
+      statements if true
+  } else {
+      statements if false
+  }
+  </pre></li>
+  <li>For constructions: <pre>
+  for (var i = startValue; i < maxValue; i ++) {
+      statements;
+  }
+  </pre></li>
+  <li>window object: window.propertyName,
+  window.methodName([params]). OR self.propertyName,
+  self.methodName([params]). OR propertyName and methodName([params])</li>
+  <li><code> var subWindow = window.open("subwindow.html", "def",
+  "height=200,width=300"); subWindow.close();</code> If you
+  invoke <code>self.close()</code> or just <code>close()</code>,
+  you will close the main window.</li>
+  <li>subwindow can refer the main window by <em>opener</em>.</li>
+  <li>form object: document.forms.length. There are three methods
+  to get form reference: (a) array index, document.forms[0]; (b)
+  string index, document.forms["formName"]; this need "name"
+  attribute.(c) document member, document.formName. </li>
+  <li>image object is similar to form object. you can get a image
+  reference by numeric or string index: document.images[0] or
+  document.images["imageName"].</li>
+  <li><code> var newElem = document.createElement("p"); var
+  newText = document.createTextNode("Hello, the world!");
+  </code></li>
+  <li>form elements. (a) text related input
+  objects: <em>input</em> elements of text, password and hidden
+  types, plus <em>textarea</em> element. (b) button related:
+  button, checkbox, radio input objects. (c)</li>
+  <li>radio buttons. check the count of radio buttons: <code>
+      document.forms[0].groupName.length</code>. check whether a
+      given button is highlighted: <code>
+      document.forms[0].groupName[0].checked
+      </code></li>
+  <li>Every form control object contains a property that points
+  to the containing form, thus you can reference the form
+  with <em>this.form</em></li>
+  <li>String methods: string.toUpperCase(), string.toLowerCase(),
+  string.indexOf(substr) (if no match, return -1),
+  string.charAt(index)(return a char), string.subString(begin,
+  end) (The character at the ending position is not included in
+  the substring).</li>
+  <li>Math: Math.PI, Math.SQRT2, Math.max(v1, v2),
+  Math.round(float), Math.floor(float) (return the integer part),
+  Math.pow(value1, 10), Math.random() (return a float number
+  between 0 and 1).</li>
+  <li>To produce a random integer between 0 and n:<code>
+  Math.floor(Math.random()*(n+1))</code>. To produce a random
+  integer between 1 and n:<code> Math.floor(Math.random()*n) + 1
+    </code>.</li>
+  <li><code>var today = new Date()</code>. The value of a Date object instance is the time, in milliseconds, from 1970-1-1 0:00 in GMT(Greenwich Mean Time) zone.
+  </li>
+  <li>Parent to child reference:
+  [window.]frames[n].ObjFuncVarName,
+  [window.]frames["frameName"].ObjFuncVarName,
+  [window.]frameName.ObjFuncVarName.</li>
+  <li>Child to Parent references: parent.ObjFuncVarName,
+  top.ObjFuncVarName (when parent == top)</li>
+  <li>Child to Child references: parent.frames[n].ObjFuncVarName,
+  parent.frames["frameName"].ObjFuncVarName,
+  parent.frameName.ObjFuncVarName.</li>
+  <li><em>onload</em> of frameset tag is fired when all the
+  documents in this frameset are loaded completedly.</li>
+  <li>How to refer to the document object of a given frame
+  object? In IE4+ and safari, <em>frameObj.document</em>; In
+  Mozilla based browsers, <em>frameObj.contentDocument</em>. you
+  can build a reference as follows:
+    <pre>
+      var docObj;
+      if (frameObj.contentDocument) {
+        docObj = frameObj.contentDocument;
+      }
+      else {
+        docObj = frameObj.document;
+      }
+    </pre>
+  </li>
+</ol>
+
+<h2>Notes</h2>
+<ol>
+  <li>CGI: Common Gateway Interface. It runns on the server side
+  to inspect the data delivered to server.</li>
+  <li>DOM: Document Object Model.</li>
+  <li>The Basic object models of all modern browsers: window,
+  navigator(browser), screen(width, height), history, location,
+  document.</li>
+  <li>location.href="new url"; location.hash="anchorName";</li>
+  <li>MicroSoft name Javascript with Jscript.</li>
+  <li>javascript value types: String, Number, Boolean, Null,
+  Object, Function.</li>
+  <li>Ajax: Asynchronous Javascript and XML. browser scripting,
+  receive XML data from server and send XML data to server.</li>
+</ol>
+
+<h2>Todo</h2>
+<ol>
+  <li>tell user which items are updated and new.</li>
+  <li>search page with tags.</li>
+</ol>
+
+<input id="test_entry" type="text" value="change me">
+<!-- invoke javascript function need '()' -->
+<input id="change_button" type="button" value="submit" 
+       onclick="submitClick()">
+
+<!-- javascript can be placed anywhere, even after invoking. -->
+<script type="text/javascript">
+  var subWindow;
+function submitClick() {
+    document.getElementById("test_entry").focus();
+    document.getElementById("test_entry").value = "No Server";
+    //window.moveTo(50, 50);
+    showDocProps();
+    if (subWindow.closed) {
+        subWindow = open("subWindow.html", "def", "height=200,width=200");
+    }
+}
+</script>
+
+<hr>
+<script type="text/javascript">
+document.write("This browser is version " + navigator.appVersion +
+    " of <span class='highlight'>" + navigator.appName +"</span>.");
+</script>
+
+<p>Today is:
+<script type="text/javascript">
+document.write(new Date());
+</script></p>
+
+<div id="doc_props">&nbsp;</div>
+
+</body>
+</html>

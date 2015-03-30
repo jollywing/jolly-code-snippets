@@ -1,0 +1,108 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<meta name="keywords" content="JS代码,菜单导航,JS广告代码,JS特效代码" />
+<meta name="description" content="此代码内容为非常小巧的JS下拉菜单代码，属于站长常用代码，更多菜单导航代码请访问懒人图库JS代码频道。" />
+<title>非常小巧的JS下拉菜单代码_懒人图库</title>
+<link rel="stylesheet" type="text/css" href="css/lrtk.css">
+<!-- dd menu -->
+<script type="text/javascript">
+<!--
+var timeout         = 500;
+var closetimer		= 0;
+var ddmenuitem      = 0;
+
+// open hidden layer
+function mopen(id)
+{	
+	// cancel close timer
+	mcancelclosetime();
+
+	// close old layer
+	if(ddmenuitem) ddmenuitem.style.visibility = 'hidden';
+
+	// get new layer and show it
+	ddmenuitem = document.getElementById(id);
+	ddmenuitem.style.visibility = 'visible';
+
+}
+// close showed layer
+function mclose()
+{
+	if(ddmenuitem) ddmenuitem.style.visibility = 'hidden';
+}
+
+// go close timer
+function mclosetime()
+{
+	closetimer = window.setTimeout(mclose, timeout);
+}
+
+// cancel close timer
+function mcancelclosetime()
+{
+	if(closetimer)
+	{
+		window.clearTimeout(closetimer);
+		closetimer = null;
+	}
+}
+
+// close layer when click-out
+document.onclick = mclose; 
+// -->
+</script>
+</head>
+
+<body style="text-align:center">
+
+<ul id="sddm">
+	<li><a href="#" onmouseover="mopen('m1')" onmouseout="mclosetime()">Home</a>
+		<div id="m1" onmouseover="mcancelclosetime()" onmouseout="mclosetime()">
+		<a href="#">HTML DropDown</a>
+		<a href="#">DHTML DropDown menu</a>
+		<a href="#">JavaScript DropDown</a>
+		<a href="#">DropDown Menu</a>
+		<a href="#">CSS DropDown</a>
+		</div>
+	</li>
+	<li><a href="#" onmouseover="mopen('m2')" onmouseout="mclosetime()">Download</a>
+		<div id="m2" onmouseover="mcancelclosetime()" onmouseout="mclosetime()">
+		<a href="#">ASP Dropdown</a>
+		<a href="#">Pulldown menu</a>
+		<a href="#">AJAX dropdown</a>
+		<a href="#">DIV dropdown</a>
+		</div>
+	</li>
+	<li><a href="#" onmouseover="mopen('m3')" onmouseout="mclosetime()">Order</a>
+		<div id="m3" onmouseover="mcancelclosetime()" onmouseout="mclosetime()">
+		<a href="#">Visa Credit Card</a>
+		<a href="#">Paypal</a>
+		</div>
+	</li>
+	<li><a href="#" onmouseover="mopen('m4')" onmouseout="mclosetime()">Help</a>
+		<div id="m4" onmouseover="mcancelclosetime()" onmouseout="mclosetime()">
+		<a href="#">Download Help File</a>
+		<a href="#">Read online</a>
+		</div>
+	</li>
+	<li><a href="#" onmouseover="mopen('m5')" onmouseout="mclosetime()">Contact</a>
+		<div id="m5" onmouseover="mcancelclosetime()" onmouseout="mclosetime()">
+		<a href="#">E-mail</a>
+		<a href="#">Submit Request Form</a>
+		<a href="http://www.lanrentuku.com/" target="_blank">lanrentuku.com</a>
+		</div>
+	</li>
+</ul>
+
+<div style="clear:both"></div>
+
+
+<p>来源：<a href="http://javascript-array.com/scripts/simple_drop_down_menu/?jsddm" target="_blank">javascript-array</a>　代码整理：<a href="http://www.lanrentuku.com/" target="_blank">懒人图库</a>　感谢：<a href="http://www.nifengla.com/" target="_blank">你疯啦</a></p>
+<p>＊尊重他人劳动成果，转载请自觉注明出处！注：此代码仅供学习交流，请勿用于商业用途。</p>
+<p></p>
+<p><p>非常小巧的JS下拉菜单代码，兼容：IE6+, Firefox 1.5+, Opera 8+, Safari 3+, Chrome 0.2+，推荐下载！</p></p>
+<p></p>
+</body>
+</html>
