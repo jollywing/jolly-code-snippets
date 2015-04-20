@@ -1,0 +1,28 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Input your email address</title>
+        <meta charset="utf-8" />
+        <script>
+         function validateEmail(){
+             var emailAddr = document.getElementById("email_text").value;
+             if(emailAddr == ""){
+                 alert("Input your email, pls!");
+                 return;
+             }
+
+             if(/\S+@\S+\.\S{2,4}/.test(emailAddr)){
+                 alert('valid email!');
+             }
+             else {
+                 alert('invalid email!');
+             }
+         }
+        </script>
+    </head>
+    <body>
+        <h1>Input your email</h1>
+        <input type="text" id="email_text">
+        <input type="button" value="Validate" onclick="validateEmail()">
+    </body>
+</html>
