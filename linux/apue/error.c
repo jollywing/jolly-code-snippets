@@ -90,7 +90,7 @@ static void err_doit(int errnoflag, int error, const char *fmt, va_list ap)
     char buf[MAXLINE];
     vsnprintf(buf, MAXLINE, fmt, ap);
     if(errnoflag)
-        snprintf(buf + strlen(buf), MAXLINE - strlen(buf), ": %s",
+        snprintf(buf + strlen(buf), MAXLINE - strlen(buf), ": %s\n",
                 strerror(error));
     fflush(stdout);             /* in case stdout and stderr are the same */
     fputs(buf, stderr);
