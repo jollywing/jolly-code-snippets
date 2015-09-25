@@ -4,3 +4,10 @@
 a.out
 *.pyc
 *.so
+*.mod.c
+*.symvers
+*.ko
+*.order
+*.o.cmd
+*.ko.cmd
+.tmp_versions
