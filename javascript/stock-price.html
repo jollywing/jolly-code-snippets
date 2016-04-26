@@ -1,0 +1,38 @@
+<!doctype html>
+<html>
+    <head>
+        <title>股价计算器</title>
+        <meta charset="utf-8" />
+        <script>
+         function calculate() {
+             var buyPrice = document.stock_price_form.buy_price_text.value;
+             var percent = document.stock_price_form.percent_text.value;
+             var result = buyPrice * (1 + percent/ 100);
+             var result_span = document.getElementById('sell-price-span');
+             result_span.innerHTML = result;
+         }
+        </script>
+        <style>
+         h2 {color: blue;}
+         body {margin:auto;}
+         .result {font-weight: bold; color: red;}
+        </style>
+    </head>
+    <body>
+        <h2>股价计算器</h2>
+        <form name="stock_price_form">
+            <table>
+                <tr><td>买入价格:</td>
+                    <td><input type="text" name="buy_price_text" ></td>
+                </tr>
+                <tr><td>预期收益:</td>
+                    <td><input type="text" name="percent_text" >%</td>
+                </tr>
+                <tr><td></td><td><input type="button" value="计算" onclick="calculate()"></td></tr>
+                <tr><td>卖出价格:</td>
+                    <td><span class="result" id="sell-price-span"></span></td>
+                </tr>
+            </table>
+        </form>
+    </body>
+</html>
