@@ -24,8 +24,8 @@ void * get_service(void *thread_id)
     int customer_id = *((int *)thread_id);
 
     if(sem_wait(&sem) == 0) {
-        usleep(100);                /* service time: 100ms */
         printf("customer %d receive service ...\n", customer_id);
+        usleep(1000);                /* service time: 100ms */
         sem_post(&sem);
     }
 }

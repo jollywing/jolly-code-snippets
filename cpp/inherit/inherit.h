@@ -8,7 +8,7 @@ using namespace std;
 class CPeople
 {
 public:
-	CPeople(char * name)	//没有提供默认的构造函数
+	CPeople(const char * name)	//没有提供默认的构造函数
 	{
 		strcpy(m_name, name);
 	}
@@ -23,7 +23,7 @@ public:
 	{
 		cout << "my name is " << m_name << endl;
 	}
-	
+
 private:	//m_name对CHero也是隐藏的，但Chero仍可以通过get_name访问到
 	char m_name[32];
 };
@@ -35,14 +35,14 @@ public:
 	//所以在CHero的构造函数中
 	//必须要为Cpeople的构造函数提供char *的参数
 	//否则会报编译错误
-	CHero( char * name, int HP) : CPeople(name), m_HP(HP)
+	CHero( const char * name, int HP) : CPeople(name), m_HP(HP)
 	{ }
 
 	int get_hp() const
-	{ 
+	{
 		//由于m_name是CPeople的私有成员, CHero访问不到，会报编译错误
-		//strcpy(m_name, "mary"); 
-		return m_HP; 	
+		//strcpy(m_name, "mary");
+		return m_HP;
 	}
 
 	//部分覆盖父类的成员函数

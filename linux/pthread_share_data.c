@@ -2,6 +2,7 @@
 /* 1. 线程可以共享全局变量吗？ */
 #include <pthread.h>
 #include <stdio.h>
+#include <unistd.h>
 
 int a = 5;
 

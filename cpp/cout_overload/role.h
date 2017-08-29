@@ -1,4 +1,6 @@
 //********__role.h__******************
+#include <string.h>
+#include <iostream>
 using namespace std;
 
 class role
@@ -6,7 +8,7 @@ class role
 	friend ostream & operator<<(ostream &, const role &);
 
 public:
-	role(char *, int, int);
+	role(const char *, int, int);
 
 
 private:
@@ -15,10 +17,10 @@ private:
 	int age;
 };
 
-/*×îºÃ²»Òª°ÑÀàµÄÊµÏÖÐ´ÔÚÍ·ÎÄ¼þÖÐ£¬ÒòÎªÈç¹ûÍ·ÎÄ¼þ±»include¶à´Î£¬ÔòÀàÊµÏÖµÄ´úÂëÒ²½«±»±àÒë¶à´Î¡£*/
-role::role(char * n, int h, int a)
+/*æœ€å¥½ä¸è¦æŠŠç±»çš„å®žçŽ°å†™åœ¨å¤´æ–‡ä»¶ä¸­ï¼Œå› ä¸ºå¦‚æžœå¤´æ–‡ä»¶è¢«includeå¤šæ¬¡ï¼Œåˆ™ç±»å®žçŽ°çš„ä»£ç ä¹Ÿå°†è¢«ç¼–è¯‘å¤šæ¬¡ã€‚*/
+role::role(const char * n, int h, int a)
 {
-	name = n;
+    strcpy(name, n);
 	height = h;
 	age =a;
 }
@@ -26,7 +28,7 @@ role::role(char * n, int h, int a)
 ostream & operator<<(ostream &output, const role &r )
 {
 	output<<r.name<<endl;
-	output<<"Éí¸ß"<<r.height<<endl;
-	output<<"ÄêÁä"<<r.age<<endl;
+	output<<"èº«é«˜"<<r.height<<endl;
+	output<<"å¹´é¾„"<<r.age<<endl;
     return output;
 }

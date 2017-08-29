@@ -2,6 +2,6 @@
 
 main()
 {
-	role hero("½£ÐÄ", 170, 25);
+	role hero("å‰‘å¿ƒ", 170, 25);
 	cout<<hero;
 }

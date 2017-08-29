@@ -1,11 +1,13 @@
-#include <iostream.h>
+#include <iostream>
 #include <string.h>
+
+using namespace std;
 
 class landscape
 {
 public:
 	landscape();
-	void setlandscape(char *, char *);
+	void setlandscape(const char *, const char *);
 	void printdiscript();
 //	~landscape();
 
@@ -20,11 +22,12 @@ landscape::landscape()
 	discript = NULL;
 }
 
-void landscape::setlandscape (char * n, char * d)/*Ç§Íò±ğÍüÁË·µ»ØÀàĞÍ*/
+void landscape::setlandscape (const char * n, const char * d)/*åƒä¸‡åˆ«å¿˜äº†è¿”å›ç±»å‹*/
 {
-	name = new char();/*Ê¹ÓÃstrcpyÇ°Òª¼Ç×¡·ÖÅäÄÚ´æ,À¨ºÅÖĞ²»±ØÖ¸¶¨ÊıÁ¿*/
+    // å¥‡æ€ªçš„ç”¨æ³•
+	name = new char();/*ä½¿ç”¨strcpyå‰è¦è®°ä½åˆ†é…å†…å­˜,æ‹¬å·ä¸­ä¸å¿…æŒ‡å®šæ•°é‡*/
 	discript = new char();
-	strcpy(name, n); //±ğÍüÁË#include <string.h>
+	strcpy(name, n); //åˆ«å¿˜äº†#include <string.h>
 	strcpy(discript, d);
 
 }
@@ -41,12 +44,12 @@ void landscape::printdiscript ()
 	delete discript;
 }*/
 
-void main()
+int main()
 {
 	landscape XIHU, YANGZHOU;
-	XIHU.setlandscape ("Î÷ºş", "É½ÍâÇàÉ½Â¥ÍâÂ¥£¬Î÷ºş¸èÎè¼¸Ê±Ğİ£¡");
-	YANGZHOU.setlandscape ("ÑïÖİ", "Ñü²øÊ®Íò¹á£¬Æïº×ÏÂÑïÖİ£¡");
+	XIHU.setlandscape ("è¥¿æ¹–", "å±±å¤–é’å±±æ¥¼å¤–æ¥¼ï¼Œè¥¿æ¹–æ­Œèˆå‡ æ—¶ä¼‘ï¼");
+	YANGZHOU.setlandscape ("æ‰¬å·", "è…°ç¼ åä¸‡è´¯ï¼Œéª‘é¹¤ä¸‹æ‰¬å·ï¼");
 	XIHU.printdiscript ();
 	YANGZHOU.printdiscript ();
-	return;
+	return 0;
 }

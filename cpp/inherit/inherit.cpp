@@ -3,14 +3,14 @@
 //#include <iostream>
 //using namespace std;
 
-void main()
+int main()
 {
 	CHero hero("john", 100 );
 	cout << hero.get_name() << endl;
 	cout << hero.get_hp() << endl;
-	
+
 	//测试多态
-	CPeople people("mary");	
+	CPeople people("mary");
 
 	//引用变量必须在声明时就初始化
 	//并且不能修改引用变量去引用另一个变量
@@ -32,6 +32,6 @@ void main()
 	//并不会自动挂接，要进行指针类型的转换
 	ptr = &hero;
 	ptr->print();
-	
-	return;
+
+	return 0;
 }
