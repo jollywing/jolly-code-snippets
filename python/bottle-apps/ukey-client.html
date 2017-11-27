@@ -1,0 +1,51 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Ukey Plugin</title>
+        <meta charset="utf-8" />
+    </head>
+    <body>
+        <h1>Test UKey Firefox plugin</h1>
+
+
+        <embed id="embed1" type="application/mozilla-npruntime-scriptable-plugin" hidden="true"  width=600 height=40>
+
+        <script>
+         var mimetype = navigator.mimeTypes["application/mozilla-npruntime-scriptable-plugin"];
+         var pluginAvailable = false;
+         if (mimetype == null) {
+             alert("Ukey Plugin unavailable!");
+         }
+
+         var plugin =mimetype.enabledPlugin;
+
+         if (plugin) {
+             pluginAvailable = true;
+             ukeyObj =document.getElementById('embed1');
+         }
+
+         function validateUkey()
+         {
+             if(!pluginAvailable) {
+                 alert('plugin is not available!');
+                 return false;
+             }
+
+             alert('validate ukey!');
+             ukeyObj.UkeyInit();
+             if (ukeyObj.UkeyCheckAvailable() != 1) {
+                 alert("Ukey不可用,验证失败!");
+                 return false;
+             }
+             ukeyObj.UkeyFinish();
+             return false;
+         }
+
+        </script>
+
+        <form name="loginForm" method="POST" action="localhost:8080/verify" onsubmit="return validateUkey()">
+            <input name="youCantSee" type="hidden" />
+            <input type="submit" value="Login"/>
+        </form>
+    </body>
+</html>

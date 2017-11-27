@@ -1,0 +1,68 @@
+<!doctype html>
+<html>
+    <head>
+        <title>添加交易记录</title>
+        <meta charset="utf-8" />
+        <script>
+         function checkForm() {
+             var num = document.forms["add_record"].num.value;
+             if (num == "") {
+                 alert('买入数量不能为空！');
+                 return false;
+             }
+             var buyDate = document.forms["add_record"].buy_date.value;
+             if (buyDate == "") {
+                 alert('买入日期不能为空！');
+                 return false;
+             }
+             var datePattern = /\d{4}-\d{2}-\d{2}/;
+             if (datePattern.test(buyDate) == false) {
+                 alert('日期格式为YYYY-mm-dd！请重新输入');
+                 return false;
+             }
+
+             var buyPrice = document.forms["add_record"].buy_price.value;
+             if (buyPrice == "") {
+                 alert('买入价格不能为空！');
+                 return false;
+             }
+
+             var gainGoal = document.forms["add_record"].gain_percent.value;
+             if (gainGoal == "") {
+                 alert('盈利目标不能为空！');
+                 return false;
+             }
+             var gainGoalNum = parseInt(gainGoal);
+             if (gainGoalNum <= 0) {
+                 alert('盈利目标要大于0！');
+                 return false;
+             }
+
+             var failPrice = document.forms["add_record"].fail_price.value;
+             if (failPrice == "") {
+                 alert('止损价格不能为空！');
+                 return false;
+             }
+
+             if (Number(failPrice) >= Number(buyPrice)) {
+                 alert('止损价格应该小于买入价格！');
+                 return false;
+             }
+             return true;
+         }
+        </script>
+    </head>
+    <body>
+        <h1>增加交易记录</h1>
+        <form name="add_record" method="post"
+              action="/add_record" onsubmit="return checkForm()">
+            <p>数量：<input type="text" name="num" size="3" />手</p>
+            <p>买入日期：<input type="text" name="buy_date" size="12"/> (YYYY-MM-DD)</p>
+            <p>买入价格：<input type="text" name="buy_price" size="5"/></p>
+            <p>盈利目标：<input type="text" name="gain_percent" size="3"/> % </p>
+            <p>止损价：<input type="text" name="fail_price" size="5"/> </p>
+            <input type="submit" value="提交" />
+        </form>
+
+    </body>
+</html>
