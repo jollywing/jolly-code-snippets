@@ -1,0 +1,9 @@
+#!/bin/sh
+
+for uppercase in `ls`
+do
+for lowercase in `ls $uppercase|tr [A-Z] [a-z]`
+do
+mv $uppercase $lowercase 2>/dev/null
+done
+done

@@ -1,0 +1,13 @@
+#!/bin/sh
+
+layout_dir=$HOME/.blog/bin/musca-layout
+
+RESULT=`ls $layout_dir| dmenu -b`
+if [ -z "$RESULT" ]; then
+    exit 1
+fi
+
+if [ -f $layout_dir/$RESULT ]; then
+    musca -c "load $layout_dir/$RESULT"
+fi
+

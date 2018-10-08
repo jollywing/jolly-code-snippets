@@ -11,3 +11,4 @@ a.out
 *.o.cmd
 *.ko.cmd
 .tmp_versions
+*~

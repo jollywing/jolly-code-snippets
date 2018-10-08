@@ -1,52 +1,25 @@
 #!/bin/sh
 
-#author: Jolly Wing
+#author: jiqing
 #remove important file safely.
 #version: 1.0
-#create: 2009-03-31
-#update: 2013-06-10
+#update: 2009-03-31
 
-TEMP_DIR=/home/wuchen/temp
+if test ! -f $1
+then
+    echo "There is no file \"$1\"."
+    exit 1
+else
+    echo "Do you want to delete \"$1\"?"
+    read choice
 
-# IFS (internal field seperator) is TAB, SPACE, NEW LINE by default.
-# When the file name contains SPACE, this program will see it as
-# several file names.
-# To Avoid this, We set IFS, then reset it when the things are done.
-OLD_IFS=$IFS
-IFS=$(echo -en "\n\b")
-
-while (( $# > 0 ))
-do
-
-    # Check whether the file exists.
-    # if test ! -f $1 -a ! -d $1 
-    if test ! -e $1
+    if test $choice = y
     then
-        echo "There is no file or directory \"$1\"."
-        # exit 1
+        rm $1
+        echo "\"$1\" is deleted."
     else
-        # echo "Do you want to delete \"$1\"?"
-        # read choice
-
-        # if test $choice = y
-        # then
-        #     rm $1
-        #     echo "\"$1\" is deleted."
-        # else
-        #     echo "you gave up."
-        # fi
-
-        # Check whether the file is already in TEMP DIRECTORY.
-        if [ $(dirname $1) -ef $TEMP_DIR ]
-        then
-            echo "[FAIL] $1 is already in $TEMP_DIR!"
-        else
-            mv $1 $TEMP_DIR
-            echo "[DONE] $1 is moved into $TEMP_DIR."
-        fi
+        echo "you gave up."
     fi
-    shift
-done
+fi
 
-IFS=$OLD_IFS
 exit 0
