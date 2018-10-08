@@ -1,0 +1,28 @@
+<!doctype html>
+<html>
+    <head>
+        <title>ukey js test</title>
+        <meta charset="utf-8" />
+    </head>
+    <body>
+        <embed id="ukey-embed" type="application/mozilla-npruntime-scriptable-plugin" hidden="true"  width=40  height=40><br>
+
+        <input type="text" id="ukey-message" style="width:100%"/>
+        <input type=button value="create packet" onclick="createUkeyMessage()" />
+	    <script type="text/javascript" src="./ukey.js"></script>
+        <script>
+         function createUkeyMessage() {
+             if (UKEY_checkPlugin() == false) {
+                 alert("ukey plugin fail!");
+                 return;
+             }
+             if (UKEY_checkAvailable() == false) {
+                 alert("ukey not available");
+                 return;
+             }
+             var text = document.getElementById('ukey-message');
+             text.value = UKEY_getMessage();
+         }
+        </script>
+    </body>
+</html>

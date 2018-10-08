@@ -1,0 +1,114 @@
+<!doctype html>
+<html>
+    <head>
+        <title>英雄技能查询</title>
+        <meta charset="utf-8" />
+
+        <script>
+         function on_race_selected()
+         {
+             race = document.getElementById('race_select').value;
+             // alert("Get: get_heroes_list/" + race);
+             var xmlhttp;
+             if (window.XMLHttpRequest)
+             {// code for IE7+, Firefox, Chrome, Opera, Safari
+              xmlhttp=new XMLHttpRequest();
+             }
+             else
+             {// code for IE6, IE5
+              xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+             }
+             xmlhttp.onreadystatechange = function()
+             {
+                 if (xmlhttp.readyState == 4 && xmlhttp.status == 200)
+                 {
+                     document.getElementById("hero_select_box").innerHTML=xmlhttp.responseText;
+                     document.getElementById("skill_list_box").innerHTML="";
+                 }
+             }
+             xmlhttp.open("GET","/get_heroes_list/" + race, true);
+             xmlhttp.send();
+         }
+
+         function on_hero_selected()
+         {
+             hero = document.getElementById('hero_select').value;
+             // alert("Get: get_skills_list/" + hero);
+             var xmlhttp;
+             if (window.XMLHttpRequest)
+             {// code for IE7+, Firefox, Chrome, Opera, Safari
+              xmlhttp=new XMLHttpRequest();
+             }
+             else
+             {// code for IE6, IE5
+              xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+             }
+             xmlhttp.onreadystatechange = function()
+             {
+                 if (xmlhttp.readyState == 4 && xmlhttp.status == 200)
+                 {
+                     document.getElementById("skill_list_box").innerHTML=xmlhttp.responseText;
+                 }
+             }
+             xmlhttp.open("GET","/get_skills_list/" + hero, true);
+             xmlhttp.send();
+         }
+
+         function show_ip()
+         {
+             var xmlhttp;
+             if (window.XMLHttpRequest)
+             {// code for IE7+, Firefox, Chrome, Opera, Safari
+              xmlhttp=new XMLHttpRequest();
+             }
+             else
+             {// code for IE6, IE5
+              xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+             }
+             xmlhttp.onreadystatechange = function()
+             {
+                 if (xmlhttp.readyState == 4 && xmlhttp.status == 200)
+                 {
+                     document.getElementById("your_ip").innerHTML=xmlhttp.responseText;
+                 }
+             }
+             xmlhttp.open("GET","/get_my_ip", true);
+             xmlhttp.send();
+         }
+
+        </script>
+
+        <style type="text/css">
+         body {width: 200px; margin-left:auto; margin-right:auto;}
+        </style>
+    </head>
+    <body onload="show_ip()">
+
+        <div class="main_window">
+            <h1>魔兽争霸英雄技能查询</h1>
+            <p>
+                <select id="race_select" name="race"
+                        onchange="on_race_selected()">
+                    <option value="" selected disabled="true">选择种族</option>
+                    <option value="人族">人族</option>
+                    <option value="兽族">兽族</option>
+                    <option value="精灵族">精灵族</option>
+                    <option value="亡灵族">亡灵族</option>
+                    <option value="中立">中立</option>
+                </select>
+
+                <div id ="hero_select_box">
+                    <select id="hero_select" "name="hero"
+                            onchange="on_hero_selected()">
+                        <option value="" selected disabled>选择英雄</option>
+                    </select>
+                </div>
+            </p>
+            <p>英雄技能：
+                <div id="skill_list_box">
+                </div>
+            </p>
+        </div>
+        <p>查询者IP：<span id="your_ip">unknown</span></p>
+    </body>
+</html>
